@@ -3,14 +3,27 @@ sidebar_position: 1
 title: Overview
 ---
 
-# Personas Overview
+# Personas Overview - v2 Enhanced
 
-Behavioral profiles that adapt Claude's approach based on context and task requirements.
+:::info Version Notice
+This overview covers **SuperClaude v2** with 9 cognitive personas and intelligent auto-activation.
+- 📚 [View v1 overview](/docs/v1/personas/overview)
+- 🆚 [Version comparison](/docs/version-comparison)
+:::
 
-## Activation
+Behavioral profiles that adapt Claude's approach based on context and task requirements. In v2, personas auto-activate intelligently and integrate seamlessly with sequential thinking.
+
+## v2 Activation Methods
 
 ```bash
-/persona:<name>
+# Auto-activation (preferred in v2)
+"Debug this error" → analyzer persona + --seq
+
+# Manual activation
+--persona-<name>
+
+# Command with persona
+/troubleshoot "issue" --persona-analyzer --seq
 ```
 
 ## Core Archetypes
@@ -60,70 +73,90 @@ Behavioral profiles that adapt Claude's approach based on context and task requi
 **Primary Question**: "How could this break?"  
 **Focus**: Quality gates > delivery speed
 
-## Collaboration Patterns
+## v2 Collaboration Patterns
 
-### Sequential Workflows
-```yaml
-Design Review: architect→security→performance→qa
-Feature Build: architect→frontend/backend→qa→security
-Analysis: analyzer→refactorer→performance→qa
+### Sequential Workflows with Transparency
+```bash
+# Design Review with --seq
+/design "system" --seq --persona-architect
+→ /scan --security --seq --persona-security  
+→ /analyze --performance --seq --persona-performance
+→ /test --comprehensive --seq --persona-qa
+
+# Feature Build with coordination
+/build "feature" --seq --persona-architect
+→ /build --frontend --seq --persona-frontend
+→ /build --api --seq --persona-backend  
+→ /test --e2e --seq --persona-qa
+→ /scan --security --seq --persona-security
 ```
 
-### Parallel Workflows
-```yaml
-Full Stack: frontend & backend & security
-Quality Focus: qa & refactorer & performance
-Teaching: mentor & analyzer
+### v2 Parallel Workflows
+```bash
+# Full Stack with /spawn
+/spawn --parallel "frontend,backend,security" --seq
+
+# Quality Focus coordination  
+/improve --quality --seq --multi-persona "qa,refactorer,performance"
+
+# Teaching with documentation
+/explain "concept" --seq --persona-mentor --c7
 ```
 
-## Auto-Activation
+## v2 Enhanced Auto-Activation
 
-### File-Based
-- `*.tsx|*.jsx` → frontend
-- `*.test.*` → qa
-- `*refactor*` → refactorer
-- `*.sql` → backend
-- `Dockerfile` → backend/architect
+### File-Based (Smarter in v2)
+- `*.tsx|*.jsx` → frontend + --magic (for UI)
+- `*.test.*|*.spec.*` → qa + --seq (test reasoning)
+- `*refactor*` → refactorer + --seq (step-by-step)
+- `*.sql` → backend + --seq (query analysis)
+- `Dockerfile|docker-compose.*` → backend + architect
+- `*.security.*|auth.*` → security + --owasp
 
-### Keyword-Based
-- `optimize` → performance
-- `secure|auth` → security
-- `refactor` → refactorer
-- `bug|error` → analyzer
-- `explain` → mentor
+### Keyword-Based with Auto-Flags
+- `"step by step"` → --seq + appropriate persona
+- `"optimize"` → performance + --seq + --pup
+- `"secure"|"auth"` → security + --seq + --owasp
+- `"refactor"` → refactorer + --seq + --think
+- `"bug"|"error"` → analyzer + --seq + --think-hard
+- `"explain"` → mentor + --seq + --c7
+- `"deep dive"` → appropriate persona + --ultrathink + --seq
 
-### Context-Based
-- Error messages → analyzer
-- Performance issues → performance
-- Architecture decisions → architect
-- Learning requests → mentor
-- Bug reports → qa
-- Code review → refactorer
+### Context-Based (v2 Intelligence)
+- Stack traces → analyzer + --seq + --think-hard
+- Performance metrics → performance + --seq + --pup
+- System design → architect + --seq + --ultrathink
+- Learning questions → mentor + --seq + --c7
+- Test failures → qa + --seq + --think
+- Code smells → refactorer + --seq + --think
 
-## MCP Tool Preferences
+## v2 MCP Tool Preferences
 
-| Persona | Primary Tools | Secondary Tools |
-|---------|--------------|-----------------|
-| architect | Sequential, Context7 | - |
-| frontend | Magic, Context7, Puppeteer | Sequential |
-| backend | Context7, Sequential | - |
-| analyzer | Sequential | All tools |
-| security | Sequential, Context7 | Puppeteer |
-| mentor | Context7, Sequential | - |
-| refactorer | Sequential, Context7 | - |
-| performance | Puppeteer, Sequential | Context7 |
-| qa | Puppeteer, Context7 | Sequential |
+| Persona | Primary Tools | Secondary Tools | Auto-Flags |
+|---------|--------------|-----------------|------------|
+| architect | Sequential, Context7 | Magic (for prototypes) | --seq, --ultrathink |
+| frontend | Magic, Context7, Puppeteer | Sequential | --magic, --seq, --pup |
+| backend | Context7, Sequential | - | --seq, --c7 |
+| analyzer | Sequential | All tools | --seq, --think-hard |
+| security | Sequential, Context7 | Puppeteer | --seq, --owasp |
+| mentor | Context7, Sequential | - | --seq, --c7 |
+| refactorer | Sequential, Context7 | - | --seq, --think |
+| performance | Puppeteer, Sequential | Context7 | --seq, --pup |
+| qa | Puppeteer, Context7 | Sequential | --seq, --pup |
 
-## Command Specialization
+## v2 Command Specialization
 
-```yaml
-security: /user:scan --security
-qa: /user:test, /user:scan --validate
-performance: /user:analyze --profile, /user:improve --perf
-analyzer: /user:analyze, /user:troubleshoot, /user:explain
-architect: /user:design --api --ddd, /user:estimate
-frontend: /user:build --react, /user:explain
-backend: /user:build --api
-refactorer: /user:improve --quality, /user:cleanup --code
-mentor: /user:explain --depth, /user:document
+```bash
+# Security persona commands
+security: /scan --security --owasp, /analyze --security
+qa: /test --comprehensive, /scan --validate  
+performance: /analyze --performance --pup, /improve --perf --seq
+analyzer: /troubleshoot --seq --think-hard, /analyze --deep
+architect: /design --system --seq --ultrathink, /estimate --complexity
+frontend: /build --ui --magic --seq, /improve --responsive
+backend: /build --api --seq, /improve --reliability  
+refactorer: /improve --quality --seq, /cleanup --technical-debt
+mentor: /explain --seq --c7, /document --interactive
+
+# All personas benefit from --seq for transparency
 ```

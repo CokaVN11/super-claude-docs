@@ -3,9 +3,15 @@ sidebar_position: 1
 title: Overview
 ---
 
-# Rules & Standards Overview
+# Rules & Standards Overview - v2 Enhanced
 
-RULES.md governs all operational behaviors with a severity-based system.
+:::info Version Notice
+This overview covers **SuperClaude v2** rules with sequential thinking and enhanced automation.
+- 📚 [View v1 overview](/docs/v1/rules-standards/overview)
+- 🆚 [Version comparison](/docs/version-comparison)
+:::
+
+RULES.md governs all operational behaviors with a severity-based system, now enhanced with sequential transparency and intelligent automation.
 
 ## Severity System
 
@@ -81,12 +87,13 @@ Rules: Read→Write | Edit>Write | No docs unless asked | Atomic ops
 Code: Clean|Conventions|Error handling|No duplication|NO COMMENTS
 ```
 
-### Task Management [H:7]
+### Task Management [H:7] - v2 Enhanced
 
 ```yaml
 TodoWrite: 3+ steps|Multiple requests | TodoRead: Start|Frequent
 Rules: One in_progress|Update immediate|Track blockers
-Integration: /user:scan --validate→execute | Risky→checkpoint | Failed→rollback
+Integration: /scan --validate --seq→execute | Risky→checkpoint | Failed→rollback
+Sequential: --seq shows task progression | Transparent blockers | Visible dependencies
 ```
 
 ### Git Operations [H:8]
@@ -97,13 +104,14 @@ Commit: status→diff→add -p→commit | Small|Descriptive|Test first
 Checkpoint: shared/checkpoint.yml | Auto before risky | /rollback
 ```
 
-### Communication [H:8]
+### Communication [H:8] - v2 Enhanced
 
 ```yaml
-Mode: 🎭Persona|🔧Command|✅Complete|🔄Switch
-Style: Concise|Structured|Evidence-based|Actionable
+Mode: 🎭Persona|🔧Command|✅Complete|🔄Switch|⚡Sequential
+Style: Concise|Structured|Evidence-based|Actionable|Transparent
+Sequential: --seq shows reasoning | Step-by-step decisions | Learning opportunities
 Code output: Minimal comments | Concise names | No explanatory text
-Responses: Consistent format | Done→Issues→Next | Remember context
+Responses: Consistent format | Done→Issues→Next | Remember context | Show steps when --seq
 ```
 
 ## Development Practices
@@ -133,20 +141,22 @@ Test all|Mock deps|Edge cases
 
 ## Efficiency & Management
 
-### Context Management [C:9]
+### Context Management [C:9] - v2 Enhanced
 
 ```yaml
->60%→/compact
->90%→Force
-Keep decisions|Remove redundant
+>60%→/compact --uc | Auto-compress with UltraCompressed
+>90%→Force compression | Emergency context preservation
+Keep decisions|Remove redundant | --seq summaries preserved
+Sequential: Compress steps not decisions | Context-aware compression
 ```
 
-### Token Optimization [C:10]
+### Token Optimization [C:10] - v2 Enhanced
 
 ```yaml
 Symbols>words|YAML>prose|Bullets>paragraphs
-Remove the|that|which
-Response<4lines
+Remove the|that|which | --uc flag auto-optimization
+Response<4lines | Except --seq mode (shows steps)
+UltraCompressed: --uc saves 70% tokens | Telegram-style responses
 ```
 
 ### Cost Control [H:8]
