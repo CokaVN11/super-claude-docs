@@ -3,11 +3,17 @@ sidebar_position: 4
 title: PERSONAS.md Usage Guide
 ---
 
-# Understanding PERSONAS.md - Behavioral Profiles
+# Understanding PERSONAS.md - v2 Behavioral Profiles
 
-Personas are specialized thinking modes that change how Claude approaches problems. Each persona has unique beliefs, priorities, and problem-solving methods. Think of them as different expert consultants you can summon instantly.
+:::info Version Notice
+This guide covers **SuperClaude v2** with 9 cognitive personas and sequential thinking.
+- 📚 [View v1 guide](/docs/v1/guides/personas-md-guide)
+- 🆚 [Version comparison](/docs/version-comparison)
+:::
 
-## The Nine Personas
+Personas are specialized thinking modes that change how Claude approaches problems. Each persona has unique beliefs, priorities, and problem-solving methods. Think of them as different expert consultants you can summon instantly - now with `--seq` for transparent reasoning!
+
+## The Nine Personas with v2 Features
 
 ### 🏗️ Architect - The Systems Thinker
 
@@ -19,15 +25,30 @@ Personas are specialized thinking modes that change how Claude approaches proble
 - Scalability planning
 - Technology selection
 
-#### Real Scenario
-```
+#### Real v2 Scenario with Sequential Thinking
+```bash
 User: We need to handle 10x more users next year
 
-/persona:architect
-Analyzing scalability requirements...
+# v2 approach with sequential reasoning
+/analyze --arch --seq --think-hard --persona-architect
 
-Current: Monolithic Django app, PostgreSQL, 1K users
-Target: 10K users, global distribution
+# Sequential analysis:
+# Step 1: Assessing current architecture...
+#   - Monolithic Django app
+#   - Single PostgreSQL instance
+#   - 1K active users
+# 
+# Step 2: Identifying bottlenecks...
+#   - Database will hit limits at 3K users
+#   - No horizontal scaling capability
+#   - Session management in memory
+#
+# Step 3: Designing scalable solution...
+#   - Microservices for critical paths
+#   - Database sharding strategy
+#   - Distributed caching layer
+#
+# Step 4: Creating migration roadmap...
 
 Recommendations:
 1. Horizontal scaling strategy:
@@ -63,18 +84,26 @@ Phase 4: Full orchestration (3 weeks)
 - Component architecture
 - Accessibility concerns
 
-#### Real Scenario
-```
+#### Real v2 Scenario with Magic Integration
+```bash
 User: Users complain our forms are confusing
 
-/persona:frontend
-Analyzing form UX issues...
+# v2 with sequential analysis and Magic UI
+/analyze --ux --seq --think --persona-frontend
+/build --form --magic --seq
 
-Problems identified:
-• No visual feedback on errors
-• Labels unclear
-• Too many fields visible at once
-• No progress indication
+# Sequential UX analysis:
+# Step 1: Identifying pain points...
+#   - No visual feedback
+#   - Too many fields at once
+#   - Unclear labels
+#
+# Step 2: Researching best practices...
+#   - Progressive disclosure
+#   - Real-time validation
+#   - Clear visual hierarchy
+#
+# Step 3: Designing solution...
 
 Solutions:
 1. Progressive disclosure:
@@ -101,7 +130,9 @@ Solutions:
    - Progress bar
    - Completion celebration
 
-[Creates improved FormWizard component]
+# Using Magic for instant UI
+/build --form-wizard --magic --seq
+[Creates improved FormWizard component with Material-UI]
 ```
 
 ### ⚙️ Backend - The Reliability Engineer
@@ -114,18 +145,26 @@ Solutions:
 - System reliability
 - Performance tuning
 
-#### Real Scenario
-```
+#### Real v2 Scenario with Performance Analysis
+```bash
 User: Our API is getting slow
 
-/persona:backend
-Analyzing API performance...
+# v2 approach with sequential investigation
+/troubleshoot --api --seq --think-hard --persona-backend
+/analyze --performance --seq
 
-Findings:
-• N+1 queries in /users endpoint
-• No connection pooling
-• Missing database indexes
-• Synchronous external API calls
+# Sequential performance analysis:
+# Step 1: Profiling API endpoints...
+#   - /users: 800ms average
+#   - /posts: 1.2s average
+#   - Database queries: 60% of time
+#
+# Step 2: Analyzing query patterns...
+#   - N+1 queries detected
+#   - Missing indexes
+#   - No connection pooling
+#
+# Step 3: Planning optimizations...
 
 Optimizations:
 1. Fix N+1 with eager loading:
@@ -172,29 +211,37 @@ Result: 200ms → 50ms response time
 - Intermittent failures
 - System analysis
 
-#### Real Scenario
-```
+#### Real v2 Scenario with Sequential Debugging
+```bash
 User: Random 500 errors in production, can't reproduce locally
 
-/persona:analyzer
-Investigating intermittent 500 errors...
+# v2 with maximum sequential analysis
+/troubleshoot --prod --seq --ultrathink --persona-analyzer
 
-Evidence gathering:
-1. Error frequency: Peaks at 9am, 1pm, 5pm
-2. Pattern: Only affects logged-in users
-3. Stack trace: "Connection pool exhausted"
-4. Correlation: Matches traffic spikes
+# Ultra-deep sequential investigation:
+# Step 1: Gathering evidence...
+#   - Error frequency: 9am, 1pm, 5pm peaks
+#   - Only affects logged-in users
+#   - Stack trace: "Connection pool exhausted"
+#
+# Step 2: Forming hypotheses...
+#   H1: Connection pool too small
+#   H2: Connection leak
+#   H3: Deadlock situation
+#
+# Step 3: Testing hypotheses...
+#   - H1: ❌ Would be constant
+#   - H2: ✓ Matches accumulation pattern
+#   - H3: ❌ No deadlock in logs
+#
+# Step 4: Deep diving into H2...
+#   - WebSocket connections not closing
+#   - Each user creates persistent connection
+#   - No cleanup on disconnect
+#
+# Step 5: Implementing fix...
 
-Hypothesis formation:
-H1: Connection pool too small ❌ (would be constant)
-H2: Connection leak ✓ (accumulates over time)
-H3: Deadlock situation ❌ (would show in logs)
-
-Root cause analysis:
-- Found: Websocket connections not closing properly
-- Each user creates persistent connection
-- Connections accumulate during peak hours
-- Pool exhausted after ~500 connections
+Root cause: WebSocket connection leak
 
 Fix:
 ```javascript
@@ -227,12 +274,25 @@ Verification: No 500 errors for 48 hours ✅
 - Data protection
 - Vulnerability assessment
 
-#### Real Scenario
-```
+#### Real v2 Scenario with OWASP Scanning
+```bash
 User: Review our user authentication
 
-/persona:security
-Performing security audit...
+# v2 security audit with sequential analysis
+/scan --security --owasp --seq --think-hard --persona-security
+
+# Sequential security audit:
+# Step 1: Checking OWASP Top 10...
+#   A01: Broken Access Control
+#   A02: Cryptographic Failures
+#   A03: Injection vulnerabilities
+#
+# Step 2: Deep diving authentication...
+#   - Password storage method
+#   - Session management
+#   - Rate limiting
+#
+# Step 3: Identifying vulnerabilities...
 
 🔴 CRITICAL Issues:
 1. Passwords stored as MD5 hashes
@@ -293,16 +353,22 @@ Security score: 2/10 → 8/10 after fixes
 - Learning new tech
 - Onboarding
 
-#### Real Scenario
-```
+#### Real v2 Scenario with Sequential Teaching
+```bash
 User: I don't understand async/await
 
-/persona:mentor
-Let me explain async/await step by step!
+# v2 mentoring with step-by-step explanation
+/explain "async/await" --seq --think --persona-mentor --c7
+
+# Sequential teaching approach:
+# Step 1: Starting with analogy...
+# Step 2: Building foundation...
+# Step 3: Showing examples...
+# Step 4: Practice exercise...
 
 Think of a restaurant:
-- Synchronous: One waiter serves one table completely before moving to next
-- Asynchronous: Waiter takes order, starts kitchen, serves other tables while food cooks
+- Synchronous: One waiter serves one table completely before next
+- Asynchronous: Waiter takes order, starts kitchen, serves others while cooking
 
 Basic example:
 ```javascript
@@ -319,7 +385,7 @@ async function getUser() {
 }
 ```
 
-Let's build understanding:
+Let's build understanding step by step:
 
 1. **Promise basics** (the foundation):
 ```javascript
@@ -368,12 +434,26 @@ Need help? Let's work through it together!
 - Improving readability
 - Technical debt
 
-#### Real Scenario
-```
+#### Real v2 Scenario with Sequential Refactoring
+```bash
 User: This code is becoming unmaintainable
 
-/persona:refactorer
-Analyzing code quality issues...
+# v2 refactoring with sequential analysis
+/analyze --quality --seq --think --persona-refactorer
+/improve --quality --seq
+
+# Sequential code analysis:
+# Step 1: Measuring complexity...
+#   - Cyclomatic complexity: 15
+#   - Nesting depth: 5
+#   - Function length: 150 lines
+#
+# Step 2: Identifying issues...
+#   - Deep nesting
+#   - Poor naming
+#   - Mixed concerns
+#
+# Step 3: Planning refactoring...
 
 Current state:
 ```javascript
@@ -440,12 +520,26 @@ Complexity score: 15 → 4
 - Load time problems
 - Resource usage
 
-#### Real Scenario
-```
+#### Real v2 Scenario with Sequential Optimization
+```bash
 User: Page takes 3 seconds to load
 
-/persona:performance
-Profiling page load performance...
+# v2 performance analysis with steps
+/analyze --performance --seq --think-hard --persona-performance
+/improve --performance --seq --uc
+
+# Sequential performance analysis:
+# Step 1: Profiling page load...
+#   - JS bundle: 1.2s (2.5MB)
+#   - API calls: 1.5s (sequential)
+#   - Rendering: 0.3s
+#
+# Step 2: Identifying optimization opportunities...
+#   - Bundle too large
+#   - Sequential API calls
+#   - No caching
+#
+# Step 3: Implementing optimizations...
 
 Performance breakdown:
 • JS bundle: 1.2s (2.5MB)
@@ -512,12 +606,26 @@ Lighthouse score: 45 → 92
 - Bug prevention
 - Test coverage
 
-#### Real Scenario
-```
+#### Real v2 Scenario with Test Generation
+```bash
 User: Too many bugs reaching production
 
-/persona:qa
-Analyzing quality process...
+# v2 quality analysis with sequential approach
+/analyze --quality --seq --think --persona-qa
+/test --generate --coverage --seq
+
+# Sequential quality analysis:
+# Step 1: Assessing current state...
+#   - Test coverage: 23%
+#   - Only happy path tests
+#   - No integration tests
+#
+# Step 2: Identifying gaps...
+#   - Critical paths untested
+#   - Edge cases ignored
+#   - No regression tests
+#
+# Step 3: Building test strategy...
 
 Current state:
 • Test coverage: 23%
@@ -596,77 +704,101 @@ Results after 1 month:
 • Deployment confidence: High
 ```
 
-## Persona Collaboration Patterns
+## v2 Persona Collaboration Patterns
 
-### Feature Development Flow
-```
-1. /persona:architect - Design the system
-2. /persona:frontend + /persona:backend - Build it
-3. /persona:qa - Test thoroughly
-4. /persona:security - Security review
-5. /persona:performance - Optimize
+### Feature Development Flow with Sequential Thinking
+```bash
+# Complete feature workflow with steps
+1. /design --system --seq --persona-architect       # Design the system
+2. /build --api --seq --persona-backend            # Build backend
+3. /build --ui --seq --persona-frontend --magic    # Build frontend  
+4. /test --e2e --seq --persona-qa --pup           # Test thoroughly
+5. /scan --security --seq --persona-security       # Security review
+6. /improve --performance --seq --persona-performance # Optimize
 ```
 
 ### Bug Investigation Flow
-```
-1. /persona:analyzer - Find root cause
-2. /persona:refactorer - Clean up code
-3. /persona:qa - Add regression tests
+```bash
+# Sequential debugging workflow
+1. /troubleshoot --seq --ultrathink --persona-analyzer  # Find root cause
+2. /improve --quality --seq --persona-refactorer       # Clean up code
+3. /test --regression --seq --persona-qa              # Add tests
 ```
 
 ### Learning Flow
-```
-1. /persona:mentor - Explain concepts
-2. /persona:architect - Show best practices
-3. Practice with guided examples
+```bash
+# Step-by-step learning
+1. /explain --concept --seq --persona-mentor --c7      # Explain with docs
+2. /design --example --seq --persona-architect        # Show best practices
+3. /build --practice --seq --think                   # Guided practice
 ```
 
-## Auto-Activation Examples
+## v2 Auto-Activation Examples
 
-### File-Based
-```
-Opening UserProfile.tsx
+### File-Based with Sequential
+```bash
+# Opening UserProfile.tsx
 → Frontend persona activates
-"Let's improve this component's UX..."
+/analyze --component --seq
+"Let's improve this component's UX step by step..."
 
-Opening auth.test.js
-→ QA persona activates
-"I see missing test cases for..."
+# Opening auth.test.js
+→ QA persona activates  
+/analyze --coverage --seq
+"I see missing test cases, let me add them systematically..."
 ```
 
-### Keyword-Based
-```
-"This is slow" → Performance persona
-"Is this secure?" → Security persona
-"Help me understand" → Mentor persona
+### Keyword-Based with v2 Features
+```bash
+"This is slow" → Performance persona + --seq
+"Is this secure?" → Security persona + --owasp + --seq
+"Help me understand" → Mentor persona + --seq + --c7
+"Debug this error" → Analyzer persona + --seq + --think-hard
 ```
 
-## Switching Personas Mid-Task
-
-```
+## Switching Personas Mid-Task (v2 Style)
+```bash
 User: Build a login form
 
-/persona:frontend
-Creating accessible login form...
+/build --form --seq --persona-frontend --magic
+# Sequential UI building...
+# Step 1: Creating accessible form structure...
+# Step 2: Adding Material-UI components...
+# Step 3: Implementing validation...
 [Builds beautiful UI]
 
 User: Now make it secure
 
-/persona:security
-Auditing login security...
-Adding:
-- CSRF tokens
-- Rate limiting
-- Secure password requirements
-- Session management
+/improve --security --seq --persona-security
+# Security hardening sequence...
+# Step 1: Auditing current implementation...
+# Step 2: Adding CSRF protection...
+# Step 3: Implementing rate limiting...
+# Step 4: Secure session management...
 ```
 
-## Best Practices
+## v2 Best Practices
 
-1. **Start with the right persona** - Sets the correct mindset
-2. **Switch when perspective changes** - Different problems need different thinking
-3. **Combine personas** - Complex tasks benefit from multiple viewpoints
-4. **Let auto-activation help** - Keywords and context trigger the right persona
-5. **Use persona commands** - Explicit commands for specialized workflows
+1. **Use --seq for complex tasks** - See the persona's thinking process
+2. **Combine with thinking modes** - `--seq --think-hard` for deep analysis
+3. **Leverage MCP servers** - `--c7` for docs, `--magic` for UI
+4. **Stack personas strategically** - Frontend + Performance for fast UIs
+5. **Let auto-activation help** - Natural language triggers the right expert
 
-Remember: Personas aren't just different response styles - they're completely different ways of thinking about problems. Choose the expert you need for the task at hand.
+## Power Combinations
+
+```bash
+# Maximum analysis
+/analyze --arch --seq --ultrathink --persona-architect --c7
+
+# Fast debugging
+/troubleshoot --seq --think --persona-analyzer --uc
+
+# Quality code
+/improve --quality --seq --persona-refactorer --think
+
+# Secure development
+/build --api --seq --persona-backend --persona-security
+```
+
+Remember: v2 personas aren't just different response styles - they're specialized experts with transparent reasoning through `--seq`. Choose the right expert and watch them think through your problem step by step! 🚀

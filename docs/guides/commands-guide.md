@@ -1,152 +1,194 @@
 ---
 sidebar_position: 7
-title: SuperClaude Commands Guide
+title: SuperClaude v2 Commands Guide
 ---
 
-# Mastering SuperClaude Commands
+# Mastering SuperClaude v2 Commands
 
-SuperClaude provides 18 powerful commands that streamline your development workflow. Each command is designed for specific tasks and can be enhanced with flags for deeper analysis and specialized behavior.
+:::info Version 2 Enhanced
+This guide covers all **19 commands** in SuperClaude v2 with extensive `--seq` and `--think` examples. [View v1 guide](/docs/v1/guides/commands-guide)
+:::
+
+SuperClaude v2 provides 19 specialized commands that cover the entire development lifecycle. Each command supports universal flags including the powerful `--seq` for sequential thinking.
 
 ## Command Structure
 
 All commands follow this pattern:
 ```bash
-/user:<command> [flags]
+/command [flags] [arguments]
 ```
 
-## Universal Flags
+## Universal Flags (Available on ALL Commands)
 
-These flags work with ALL commands:
-
-### Thinking Modes
+### 🧠 Thinking Modes
 ```bash
---think          # Standard analysis (multi-file, ~4K tokens)
---think-hard     # Deep analysis (architecture level, ~10K tokens)  
---ultrathink     # Critical analysis (system-wide, ~32K tokens)
+--think          # Standard analysis (~4K tokens)
+--think-hard     # Deep analysis (~10K tokens)  
+--ultrathink     # Maximum analysis (~32K tokens)
+--seq            # Sequential step-by-step reasoning
 ```
 
-### Planning & Documentation
+### ⚡ Optimization
 ```bash
---plan           # Show execution plan before running
---uc             # UltraCompressed mode (~70% token reduction)
+--plan           # Preview execution plan
+--uc             # UltraCompressed mode (70% token savings)
+--introspect     # Show AI reasoning process
 ```
 
-### MCP Server Control
+### 🔌 MCP Servers
 ```bash
---c7/--no-c7     # Context7 docs lookup
---seq/--no-seq   # Sequential thinking
---magic/--no-magic # Magic UI builder
---pup/--no-pup   # Puppeteer browser
+--c7             # Context7 documentation lookup
+--seq            # Sequential thinking server
+--magic          # Magic UI component builder
+--pup            # Puppeteer browser automation
 --all-mcp        # Enable all MCP servers
---no-mcp         # Native tools only
+--no-mcp         # Disable all MCP servers
+```
+
+### 🎭 Personas
+```bash
+--persona-architect    # Systems thinking
+--persona-frontend     # UI/UX focus
+--persona-backend      # API & reliability
+--persona-analyzer     # Debugging expert
+--persona-security     # Security mindset
+--persona-mentor       # Teaching mode
+--persona-refactorer   # Code quality
+--persona-performance  # Speed optimization
+--persona-qa          # Testing focus
 ```
 
 ## Development Commands
 
-### 🔨 /user:build - Universal Project Builder
+### 🔨 /build - Universal Project Builder
 
-**Purpose**: Build anything from components to full applications
+**Purpose**: Build anything from components to full applications with intelligent scaffolding
 
 **Key Flags**:
 ```bash
 --init           # Initialize new project
 --feature        # Add specific feature
---react          # React project with best practices
---api            # RESTful API with Express
---fullstack      # Complete full-stack app
+--react          # React with best practices
+--api            # RESTful/GraphQL API
+--fullstack      # Complete application
 --tdd            # Test-driven development
---watch          # Live development mode
+--component      # Reusable components
 ```
 
-**Examples**:
+**Examples with --seq and --think**:
 
 ```bash
-# New React project
-/user:build --init --react
-→ Creates: Vite + React + TypeScript + Testing setup
+# Build React app with sequential reasoning
+/build --react --seq --think
+"e-commerce product catalog"
 
-# Add authentication feature
-/user:build --feature "user authentication with JWT"
-→ Adds: Auth endpoints, JWT logic, middleware
+# Sequential process:
+# Step 1: Analyzing requirements...
+# Step 2: Designing component hierarchy...
+# Step 3: Setting up project structure...
+# Step 4: Implementing core components...
+# Step 5: Adding state management...
+# Step 6: Creating test suite...
 
-# Full-stack app with TDD
-/user:build --fullstack --tdd
-→ Creates: React frontend + Express backend + tests
+# Build API with deep thinking
+/build --api --seq --think-hard
+"payment processing service"
+
+# Sequential steps:
+# → Design API endpoints
+# → Implement security layers
+# → Add payment gateway integration
+# → Create error handling
+# → Generate API documentation
 ```
 
-**Real Scenario**:
-```
-User: /user:build --react --magic
-Building a dashboard for analytics
+**Real-world TDD example**:
+```bash
+/build --feature "user notifications" --tdd --seq --persona-backend
 
-SuperClaude:
-Creating React dashboard...
-✓ Project structure with Vite
-✓ TypeScript configuration
-✓ Component architecture
-[Magic activated] Generating dashboard components:
-- MetricsCard
-- ChartContainer
-- DataTable
-✓ Responsive layout
-✓ Dark mode support
+# TDD sequence:
+# 1. Write failing tests for notification service
+# 2. Implement notification models
+# 3. Create notification API endpoints
+# 4. Add real-time WebSocket support
+# 5. Implement email/SMS providers
+# 6. All tests passing ✓
 ```
 
-### 🧪 /user:test - Comprehensive Testing
+### 🧪 /test - Comprehensive Testing Framework
 
-**Purpose**: Create and run tests at all levels
+**Purpose**: Create and run tests at all levels with intelligent test generation
 
 **Key Flags**:
 ```bash
---unit           # Unit tests only
+--unit           # Unit tests
 --integration    # Integration tests
 --e2e            # End-to-end tests
---coverage       # Generate coverage report
---watch          # Watch mode
---fix            # Fix failing tests
+--coverage       # Coverage analysis
+--performance    # Performance tests
+--security       # Security tests
+--generate       # Auto-generate tests
 ```
 
-**Examples**:
+**Examples with --seq and --think**:
+
 ```bash
-# Full test suite with coverage
-/user:test --coverage
-→ Runs all tests, generates coverage report
+# Generate comprehensive test suite
+/test --generate --seq --think
+"shopping cart functionality"
 
-# Watch mode for TDD
-/user:test --unit --watch
-→ Re-runs tests on file changes
+# Sequential test generation:
+# → Analyze code structure
+# → Identify test scenarios
+# → Generate unit tests
+# → Create integration tests
+# → Add edge cases
+# → Verify coverage
 
-# E2E testing with Puppeteer
-/user:test --e2e --pup
-→ Browser-based testing
+# E2E testing with browser automation
+/test --e2e --seq --pup --think-hard
+"user checkout flow"
+
+# Process:
+# Step 1: Map user journey
+# Step 2: Write Puppeteer scripts
+# Step 3: Test happy path
+# Step 4: Test error scenarios
+# Step 5: Performance validation
 ```
 
-### 🛠️ /user:dev-setup - Environment Configuration
+### 🛠️ /dev-setup - Development Environment Configuration
 
-**Purpose**: Set up development environment and CI/CD
+**Purpose**: Configure complete development environments with best practices
 
 **Key Flags**:
 ```bash
 --install        # Install dependencies
 --ci             # CI/CD pipeline setup
---hooks          # Git hooks
---monitor        # Monitoring setup
 --docker         # Docker configuration
+--env            # Environment variables
+--hooks          # Git hooks
+--monitoring     # Monitoring setup
 ```
 
-**Example Workflow**:
+**Examples with sequential setup**:
+
 ```bash
-# Complete dev environment
-/user:dev-setup --install --ci --hooks
-→ Package installation
-→ GitHub Actions workflow
-→ Pre-commit hooks
-→ ESLint + Prettier
+# Complete DevOps setup
+/dev-setup --ci --docker --monitoring --seq --think-hard
+
+# Sequential configuration:
+# → Analyze project requirements
+# → Setup Docker containers
+# → Configure CI/CD pipeline
+# → Add monitoring tools
+# → Create deployment scripts
+# → Document setup process
 ```
 
 ## Analysis & Improvement Commands
 
-### 🔍 /user:analyze - Multi-Dimensional Analysis
+### 🔍 /analyze - Multi-dimensional Analysis
 
 **Purpose**: Deep analysis of code, architecture, performance, and security
 
@@ -154,427 +196,727 @@ Creating React dashboard...
 ```bash
 --code           # Code quality analysis
 --architecture   # System design review
---profile        # Performance profiling
---security       # Security audit
+--performance    # Performance profiling
+--security       # Security analysis
+--dependencies   # Dependency audit
 --complexity     # Complexity metrics
---deps           # Dependency analysis
 ```
 
-**Examples**:
+**Advanced examples with --seq**:
 
 ```bash
-# Full codebase analysis
-/user:analyze --code --think
-→ Code quality report
-→ Complexity metrics
-→ Improvement suggestions
+# Architecture analysis with sequential thinking
+/analyze --architecture --seq --ultrathink
 
-# Performance deep dive
-/user:analyze --profile --seq
-→ Bottleneck identification
-→ Memory usage patterns
-→ Optimization opportunities
+# Deep sequential analysis:
+# Step 1: Map system components
+# Step 2: Analyze dependencies
+# Step 3: Identify coupling issues
+# Step 4: Evaluate scalability
+# Step 5: Suggest improvements
+# Step 6: Create refactoring plan
 
-# Architecture review
-/user:analyze --architecture --think-hard
-→ System design evaluation
-→ Coupling analysis
-→ Scalability assessment
+# Performance bottleneck investigation
+/analyze --performance --seq --think-hard --c7
+"API response time over 2 seconds"
+
+# Investigation sequence:
+# → Profile request lifecycle
+# → Analyze database queries
+# → Check N+1 problems
+# → Review caching strategy
+# → Memory usage analysis
+# → Generate optimization report
 ```
 
-**Real Usage**:
-```
-User: /user:analyze --profile
-App feels slow, not sure why
+### 📋 /review - AI-Powered Code Review
 
-SuperClaude:
-Profiling application performance...
+**Purpose**: Comprehensive code review with actionable feedback
 
-⚠️ Performance Issues Found:
-1. N+1 queries in /api/users (320ms)
-2. Unoptimized images (1.2MB average)
-3. Synchronous API calls in component
-4. Missing database indexes
-
-📊 Metrics:
-- Initial load: 4.2s
-- Time to interactive: 5.8s
-- Bundle size: 2.4MB
-
-🎯 Quick wins:
-1. Add eager loading: -300ms
-2. Image optimization: -1s
-3. Parallel API calls: -500ms
+**Key Flags**:
+```bash
+--pr             # Pull request review
+--security       # Security-focused review
+--performance    # Performance review
+--standards      # Coding standards
+--suggest        # Improvement suggestions
 ```
 
-### 🐛 /user:troubleshoot - Debug & Fix Issues
+**Review examples with thinking modes**:
 
-**Purpose**: Systematic debugging and problem resolution
+```bash
+# Pull request review with sequential analysis
+/review --pr --seq --think --persona-architect
+
+# Review process:
+# → Check architecture alignment
+# → Review code patterns
+# → Validate test coverage
+# → Security considerations
+# → Performance implications
+# → Detailed feedback
+
+# Security-focused review
+/review --security --seq --think-hard --owasp
+
+# Security review steps:
+# Step 1: Input validation check
+# Step 2: Authentication review
+# Step 3: Authorization audit
+# Step 4: Data exposure analysis
+# Step 5: OWASP compliance
+```
+
+### 🔧 /troubleshoot - Professional Debugging
+
+**Purpose**: Systematic debugging and root cause analysis
 
 **Key Flags**:
 ```bash
 --investigate    # Deep investigation mode
---fix            # Apply fixes
+--prod           # Production debugging
+--logs           # Log analysis
+--trace          # Stack trace analysis
 --five-whys      # Root cause analysis
---prod           # Production-specific
---emergency      # Crisis mode
+--reproduce      # Reproduction steps
 ```
 
-**Investigation Flow**:
+**Complex debugging with --seq**:
+
 ```bash
-# Step 1: Investigate
-/user:troubleshoot --investigate
-→ Gathers evidence
-→ Forms hypotheses
-→ Tests theories
+# Production issue investigation
+/troubleshoot --prod --seq --think-hard
+"Memory leak causing server crashes"
 
-# Step 2: Fix
-/user:troubleshoot --fix
-→ Implements solution
-→ Adds tests
-→ Verifies fix
+# Sequential debugging:
+# Step 1: Analyze memory patterns
+# Step 2: Identify leak sources
+# Step 3: Trace object references
+# Step 4: Find retention paths
+# Step 5: Implement fixes
+# Step 6: Verify resolution
+
+# Intermittent bug hunting
+/troubleshoot --investigate --seq --ultrathink
+"Random data corruption in distributed system"
+
+# Investigation sequence:
+# → Collect failure patterns
+# → Analyze timing conditions
+# → Check race conditions
+# → Review transaction logs
+# → Identify root cause
+# → Design prevention strategy
 ```
 
-**Production Emergency**:
-```
-User: /user:troubleshoot --prod --emergency
-Database connections maxing out!
+### ⚡ /improve - Evidence-Based Optimization
 
-SuperClaude:
-🚨 Emergency Mode Activated
-
-Immediate actions:
-1. Checking connection pool: 100/100 used
-2. Active queries: 847 (!)
-3. Found: Connection leak in auth middleware
-
-Quick fix:
-```javascript
-// Add to auth.js line 45:
-finally {
-  await connection.release();
-}
-```
-Deploy this NOW.
-
-Long-term fix after crisis:
-- Implement connection pooling
-- Add monitoring alerts
-- Review all middleware
-```
-
-### ⚡ /user:improve - Code Enhancement
-
-**Purpose**: Improve code quality, performance, and maintainability
+**Purpose**: Systematic code and performance improvements
 
 **Key Flags**:
 ```bash
 --quality        # Code quality improvements
 --performance    # Performance optimization
---refactor       # Refactoring suggestions
---iterate        # Iterative improvements
---threshold <n>  # Target metric threshold
+--refactor       # Code refactoring
+--modernize      # Update to modern patterns
+--iterate        # Iterative improvement
+--threshold      # Quality threshold
 ```
 
-**Examples**:
+**Optimization examples**:
+
 ```bash
-# Improve code quality
-/user:improve --quality
-→ Reduces complexity
-→ Improves naming
-→ Adds error handling
+# Performance optimization with sequential steps
+/improve --performance --seq --think-hard --uc
+"Database queries taking 5+ seconds"
 
-# Performance optimization
-/user:improve --performance --threshold 90
-→ Optimizes until 90% performance score
-→ Implements caching
-→ Reduces bundle size
+# Optimization sequence:
+# → Profile query execution
+# → Analyze query plans
+# → Add strategic indexes
+# → Implement query caching
+# → Batch operations
+# → Measure improvements
+
+# Code modernization
+/improve --modernize --seq --think --persona-refactorer
+"Legacy jQuery codebase to React"
+
+# Modernization steps:
+# Step 1: Analyze current structure
+# Step 2: Plan migration phases
+# Step 3: Create React components
+# Step 4: Migrate state management
+# Step 5: Update build process
+# Step 6: Deprecate legacy code
 ```
 
-### 📚 /user:explain - Deep Explanations
+### 📚 /explain - Technical Documentation Generator
 
-**Purpose**: Explain code, concepts, or decisions
+**Purpose**: Generate clear technical explanations and documentation
 
 **Key Flags**:
 ```bash
---depth <level>  # beginner/intermediate/expert
+--depth          # Explanation depth (novice/intermediate/expert)
 --visual         # Include diagrams
---examples       # Real-world examples
---compare        # Compare approaches
+--examples       # Code examples
+--interactive    # Interactive tutorials
+--api            # API documentation
 ```
 
-**Usage**:
-```bash
-# Explain complex code
-/user:explain --depth intermediate
-"How does this authentication middleware work?"
+**Documentation with sequential explanation**:
 
-# Compare approaches
-/user:explain --compare
-"REST vs GraphQL for our use case"
+```bash
+# Complex concept explanation
+/explain "microservices architecture" --seq --think --visual
+
+# Explanation sequence:
+# → Define core concepts
+# → Explain principles
+# → Show architecture diagram
+# → Discuss benefits/drawbacks
+# → Provide real examples
+# → Best practices guide
+
+# API documentation with examples
+/explain --api --seq --examples --c7
+"GraphQL schema design"
+
+# Documentation steps:
+# Step 1: Schema overview
+# Step 2: Type definitions
+# Step 3: Query examples
+# Step 4: Mutation patterns
+# Step 5: Error handling
+# Step 6: Best practices
 ```
 
 ## Operations Commands
 
-### 🚀 /user:deploy - Deployment Management
+### 🚀 /deploy - Intelligent Deployment Management
 
-**Purpose**: Deploy applications safely
+**Purpose**: Safe, automated deployment with rollback capabilities
 
 **Key Flags**:
 ```bash
---env <env>      # Target environment
---rollback       # Rollback deployment
+--env            # Target environment
 --canary         # Canary deployment
---dry-run        # Preview only
+--blue-green     # Blue-green deployment
+--rollback       # Rollback capability
+--validate       # Pre-deployment validation
+--monitor        # Post-deployment monitoring
 ```
 
-**Deployment Flow**:
+**Deployment examples with sequential process**:
+
 ```bash
-# Stage first
-/user:deploy --env staging --plan
-→ Shows deployment plan
-→ Runs pre-flight checks
+# Production deployment with safety checks
+/deploy --env prod --canary --seq --think-hard
 
-# Production with safety
-/user:deploy --env prod --canary
-→ Deploys to 10% of servers
-→ Monitors metrics
-→ Auto-rollback if issues
+# Deployment sequence:
+# → Validate build artifacts
+# → Run pre-deployment tests
+# → Deploy to canary (5%)
+# → Monitor metrics
+# → Gradual rollout (25%, 50%, 100%)
+# → Post-deployment validation
+
+# Blue-green deployment
+/deploy --blue-green --seq --monitor --think
+"critical payment service update"
+
+# Process:
+# Step 1: Prepare green environment
+# Step 2: Deploy to green
+# Step 3: Run smoke tests
+# Step 4: Switch traffic
+# Step 5: Monitor both environments
+# Step 6: Decommission blue
 ```
 
-### 🔒 /user:scan - Security & Validation
+### 🔄 /migrate - Database and Code Migration
 
-**Purpose**: Security audits and code validation
+**Purpose**: Safe migration of databases, APIs, and codebases
 
 **Key Flags**:
 ```bash
---security       # Security audit
---owasp          # OWASP compliance
---deps           # Dependency vulnerabilities
---validate       # Code validation
+--database       # Database migrations
+--api            # API version migration
+--data           # Data migration
+--validate       # Migration validation
+--rollback       # Rollback plan
+--zero-downtime  # Zero-downtime migration
 ```
 
-**Security Workflow**:
+**Migration examples**:
+
 ```bash
-# Full security audit
-/user:scan --security --owasp
-→ Checks for vulnerabilities
-→ OWASP Top 10 compliance
-→ Generates security report
+# Database migration with sequential validation
+/migrate --database --zero-downtime --seq --think-hard
+"PostgreSQL schema update for multi-tenancy"
 
-# Pre-deployment validation
-/user:scan --validate
-→ Linting
-→ Type checking
-→ Test coverage
-→ Security basics
+# Migration sequence:
+# → Analyze current schema
+# → Design migration strategy
+# → Create migration scripts
+# → Test on staging
+# → Execute with validation
+# → Verify data integrity
+
+# API version migration
+/migrate --api --seq --think
+"v1 to v2 with breaking changes"
+
+# Steps:
+# Step 1: Map API differences
+# Step 2: Create compatibility layer
+# Step 3: Implement versioning
+# Step 4: Migration guides
+# Step 5: Deprecation timeline
 ```
 
-### 🧹 /user:cleanup - Project Maintenance
+### 🔒 /scan - Security and Compliance Scanning
 
-**Purpose**: Clean and organize projects
+**Purpose**: Comprehensive security auditing and vulnerability scanning
 
 **Key Flags**:
 ```bash
---code           # Code cleanup
---files          # File organization
---deps           # Dependency cleanup
---git            # Git cleanup
---all            # Everything
---dry-run        # Preview changes
+--security       # Security vulnerabilities
+--owasp          # OWASP Top 10
+--dependencies   # Dependency vulnerabilities
+--secrets        # Secret detection
+--compliance     # Compliance check
+--pentest        # Penetration testing
 ```
 
-**Safe Cleanup**:
+**Security scanning examples**:
+
 ```bash
-# Always preview first
-/user:cleanup --all --dry-run
-→ Shows what will be cleaned
+# Comprehensive security audit
+/scan --security --owasp --seq --ultrathink
 
-# Then execute
-/user:cleanup --all
-→ Removes unused code
-→ Organizes files
-→ Updates dependencies
-→ Cleans git history
+# Scanning sequence:
+# → Code vulnerability scan
+# → Dependency audit
+# → OWASP compliance check
+# → Secret detection
+# → Access control review
+# → Generate security report
+
+# Pre-deployment security check
+/scan --pentest --seq --think-hard --persona-security
+"e-commerce platform before launch"
+
+# Penetration test sequence:
+# Step 1: Attack surface mapping
+# Step 2: Vulnerability scanning
+# Step 3: Exploit attempts
+# Step 4: Privilege escalation tests
+# Step 5: Data exfiltration tests
+# Step 6: Remediation plan
 ```
 
-### 📝 /user:git - Git Workflow Management
+### 📊 /estimate - Project Estimation with Risk Analysis
 
-**Purpose**: Comprehensive git operations
+**Purpose**: Accurate project estimation with risk factors
 
 **Key Flags**:
 ```bash
---status         # Enhanced status
---commit         # Smart commit
---checkpoint     # Create checkpoint
---rollback       # Rollback to checkpoint
---sync           # Sync with remote
+--scope          # Scope definition
+--breakdown      # Task breakdown
+--risks          # Risk analysis
+--team           # Team size consideration
+--buffer         # Buffer calculation
+--monte-carlo    # Statistical analysis
 ```
 
-**Advanced Git Flow**:
+**Estimation examples**:
+
 ```bash
-# Before risky operation
-/user:git --checkpoint
-→ Creates safe restore point
+# Feature estimation with risk analysis
+/estimate "implement real-time chat" --seq --think --risks
 
-# Smart commit
-/user:git --commit
-→ Stages intelligently
-→ Generates commit message
-→ Runs pre-commit checks
+# Estimation sequence:
+# → Break down into tasks
+# → Estimate each component
+# → Identify dependencies
+# → Analyze risks
+# → Calculate buffers
+# → Provide range (optimistic/realistic/pessimistic)
 
-# If things go wrong
-/user:git --rollback
-→ Restores to checkpoint
+# Project estimation with Monte Carlo
+/estimate --scope project --monte-carlo --seq --think-hard
+"mobile app MVP development"
+
+# Analysis steps:
+# Step 1: Define all features
+# Step 2: Historical data analysis
+# Step 3: Risk identification
+# Step 4: Monte Carlo simulation
+# Step 5: Confidence intervals
+# Step 6: Resource planning
+```
+
+### 🧹 /cleanup - Project Maintenance and Optimization
+
+**Purpose**: Clean up code, dependencies, and project structure
+
+**Key Flags**:
+```bash
+--unused         # Remove unused code
+--dependencies   # Clean dependencies
+--logs           # Clean log files
+--cache          # Clear caches
+--optimize       # Optimize assets
+--audit          # Audit before cleanup
+```
+
+**Cleanup examples**:
+
+```bash
+# Comprehensive project cleanup
+/cleanup --unused --dependencies --seq --think
+
+# Cleanup sequence:
+# → Audit current state
+# → Identify unused code
+# → Find obsolete dependencies
+# → Remove safely
+# → Optimize remaining code
+# → Update documentation
+
+# Production cleanup with safety
+/cleanup --audit --seq --think-hard --plan
+"remove 2 years of technical debt"
+
+# Safe cleanup process:
+# Step 1: Full audit report
+# Step 2: Impact analysis
+# Step 3: Backup critical parts
+# Step 4: Incremental cleanup
+# Step 5: Validation testing
+# Step 6: Performance comparison
+```
+
+### 📝 /git - Git Workflow Automation
+
+**Purpose**: Streamline Git operations and enforce best practices
+
+**Key Flags**:
+```bash
+--commit         # Smart commits
+--pr             # Pull request creation
+--branch         # Branch management
+--merge          # Merge strategies
+--rebase         # Rebase workflows
+--bisect         # Bug hunting
+```
+
+**Git workflow examples**:
+
+```bash
+# Intelligent commit with sequential analysis
+/git --commit --seq --think
+
+# Commit sequence:
+# → Analyze changes
+# → Group related changes
+# → Generate commit message
+# → Run pre-commit checks
+# → Create atomic commits
+# → Update documentation
+
+# Complex merge resolution
+/git --merge --conflict --seq --think-hard
+"feature branch with 50+ conflicts"
+
+# Resolution process:
+# Step 1: Analyze conflict patterns
+# Step 2: Understand both changes
+# Step 3: Resolve systematically
+# Step 4: Test merged code
+# Step 5: Verify functionality
 ```
 
 ## Design & Architecture Commands
 
-### 🏗️ /user:design - System Design
+### 🏗️ /design - Professional System Design
 
-**Purpose**: Design APIs, systems, and architectures
+**Purpose**: Create comprehensive system designs and architectures
 
 **Key Flags**:
 ```bash
+--architecture   # System architecture
 --api            # API design
+--database       # Database design
+--microservices  # Microservices design
 --ddd            # Domain-driven design
---prd            # Product requirements
---openapi        # OpenAPI spec
---graphql        # GraphQL schema
+--patterns       # Design patterns
 ```
 
-**Design Workflows**:
-```bash
-# API design with DDD
-/user:design --api --ddd
-→ Identifies bounded contexts
-→ Designs aggregates
-→ Creates API endpoints
-→ Generates OpenAPI spec
+**Design examples with sequential thinking**:
 
-# Full system design
-/user:design --prd --think-hard
-→ Analyzes requirements
-→ Proposes architecture
-→ Identifies risks
-→ Creates implementation plan
+```bash
+# Microservices architecture design
+/design --microservices --ddd --seq --ultrathink
+"online banking platform"
+
+# Design sequence:
+# → Domain analysis
+# → Boundary identification
+# → Service decomposition
+# → API gateway design
+# → Event-driven communication
+# → Deployment architecture
+
+# API design with best practices
+/design --api --rest --seq --think-hard --c7
+"multi-tenant SaaS platform"
+
+# API design steps:
+# Step 1: Resource modeling
+# Step 2: Endpoint design
+# Step 3: Authentication strategy
+# Step 4: Rate limiting
+# Step 5: Versioning approach
+# Step 6: OpenAPI specification
 ```
 
 ## Workflow Commands
 
-### 🤖 /user:spawn - Focused Agent
+### 🚦 /spawn - Parallel Task Execution
 
-**Purpose**: Create specialized agent for specific task
+**Purpose**: Spawn focused agents for parallel task execution
 
+**Key Flags**:
 ```bash
-/user:spawn --task "optimize database queries"
-→ Creates focused agent
-→ Analyzes all queries
-→ Optimizes systematically
-→ Reports improvements
+--task           # Define specific task
+--parallel       # Parallel execution
+--coordinate     # Coordinate agents
+--merge          # Merge results
+--timeout        # Execution timeout
 ```
 
-### 📖 /user:document - Documentation
+**Parallel execution examples**:
 
-**Purpose**: Generate documentation
+```bash
+# Parallel feature development
+/spawn --parallel --seq --think
+- --task "frontend components"
+- --task "API endpoints"  
+- --task "database schema"
+- --task "test suite"
+
+# Coordination sequence:
+# → Spawn specialized agents
+# → Execute tasks in parallel
+# → Monitor progress
+# → Coordinate dependencies
+# → Merge results
+# → Integration testing
+
+# Parallel debugging
+/spawn --parallel --coordinate --seq
+"investigate performance issues across services"
+
+# Parallel investigation:
+# Agent 1: Database analysis
+# Agent 2: API profiling
+# Agent 3: Frontend metrics
+# Agent 4: Infrastructure review
+# → Correlate findings
+# → Identify root cause
+```
+
+### 📖 /document - Multi-format Documentation
+
+**Purpose**: Generate comprehensive documentation in various formats
 
 **Key Flags**:
 ```bash
 --api            # API documentation
---user           # User guides
---readme         # README files
---inline         # Code comments
+--user           # User documentation  
+--technical      # Technical docs
+--architecture   # Architecture docs
+--readme         # README generation
+--interactive    # Interactive docs
 ```
 
-## System Commands
+**Documentation examples**:
 
-### 📂 /user:load - Load Project Context
+```bash
+# Comprehensive API documentation
+/document --api --interactive --seq --think
+"GraphQL API with 50+ endpoints"
 
-**Purpose**: Load project into context
+# Documentation sequence:
+# → Extract schema
+# → Document types
+# → Example queries
+# → Authentication guide
+# → Rate limiting docs
+# → Interactive playground
+
+# Architecture documentation
+/document --architecture --visual --seq --think-hard
+
+# Process:
+# Step 1: System overview
+# Step 2: Component diagrams
+# Step 3: Data flow
+# Step 4: Deployment view
+# Step 5: Decision records
+# Step 6: Evolution roadmap
+```
+
+### 📥 /load - Context Loading and Analysis
+
+**Purpose**: Load and analyze project context intelligently
 
 **Key Flags**:
 ```bash
---depth shallow  # Main files only
---depth medium   # Include tests
---depth deep     # Everything relevant
+--depth          # Analysis depth
+--patterns       # Pattern recognition
+--context        # Context preservation
+--index          # Create searchable index
+--cache          # Cache analysis
 ```
 
-## Power Workflows
+**Context loading examples**:
 
-### Complete Feature Development
 ```bash
-# 1. Load and analyze
-/user:load --depth deep
-/user:analyze --architecture
+# Deep project analysis
+/load --depth deep --patterns --seq --think-hard
 
-# 2. Design
-/user:design --api --ddd
+# Loading sequence:
+# → Scan project structure
+# → Identify frameworks
+# → Analyze patterns
+# → Map dependencies
+# → Index codebase
+# → Generate insights
 
-# 3. Build with TDD
-/user:build --feature --tdd
+# Pattern recognition
+/load --patterns --seq --think
+"identify architectural patterns"
 
-# 4. Test thoroughly
-/user:test --coverage
-
-# 5. Security check
-/user:scan --security
-
-# 6. Deploy
-/user:deploy --env staging
+# Analysis steps:
+# Step 1: Code structure analysis
+# Step 2: Pattern detection
+# Step 3: Anti-pattern identification
+# Step 4: Best practice alignment
+# Step 5: Recommendations
 ```
 
-### Emergency Production Fix
+### ✅ /task - Advanced Task Management
+
+**Purpose**: Sophisticated task management with AI-driven breakdown
+
+**Key Flags**:
 ```bash
-# 1. Investigate
-/user:troubleshoot --prod --investigate --ultrathink
-
-# 2. Create checkpoint
-/user:git --checkpoint
-
-# 3. Fix issue
-/user:troubleshoot --fix
-
-# 4. Validate
-/user:scan --validate
-/user:test
-
-# 5. Deploy fix
-/user:deploy --env prod --emergency
+--create         # Create tasks
+--breakdown      # Break into subtasks
+--estimate       # Time estimation
+--dependencies   # Task dependencies
+--kanban         # Kanban board
+--sprint         # Sprint planning
 ```
 
-### Performance Optimization
+**Task management examples**:
+
 ```bash
-# 1. Profile
-/user:analyze --profile --seq
+# Complex feature breakdown
+/task --create --breakdown --seq --think
+"implement user dashboard with real-time updates"
 
-# 2. Improve iteratively
-/user:improve --performance --iterate --threshold 95
+# Task breakdown sequence:
+# → Analyze requirements
+# → Create epic
+# → Break into stories
+# → Define subtasks
+# → Estimate effort
+# → Set dependencies
+# → Create timeline
 
-# 3. Validate improvements
-/user:test --performance
-/user:analyze --profile
+# Sprint planning
+/task --sprint --estimate --seq --think-hard
+"2-week sprint for payment integration"
+
+# Planning sequence:
+# Step 1: Velocity analysis
+# Step 2: Story prioritization
+# Step 3: Capacity planning
+# Step 4: Risk assessment
+# Step 5: Sprint backlog
+# Step 6: Daily plan
 ```
 
-## Best Practices
+## Best Practices for Command Usage
 
-1. **Start with load**: Always load context first
-2. **Use --plan for risky operations**: Preview before executing
-3. **Chain commands naturally**: Analysis → Design → Build → Test
-4. **Checkpoint before big changes**: Use git checkpoints
-5. **Validate before deploy**: Always scan --validate
-6. **Use appropriate thinking depth**: Don't --ultrathink for simple tasks
-7. **Let MCP tools auto-activate**: They usually pick correctly
+### 1. Start Simple, Add Complexity
+```bash
+# Start with basic command
+/analyze
 
-## Quick Reference Card
+# Add thinking for complex issues
+/analyze --think
 
-| Task | Command Sequence |
-|------|-----------------|
-| New feature | `load → analyze → design → build --tdd → test` |
-| Fix bug | `troubleshoot --investigate → fix → test` |
-| Optimize | `analyze --profile → improve --performance` |
-| Deploy | `test → scan --validate → deploy --env` |
-| Emergency | `troubleshoot --prod --emergency → fix → deploy` |
-| Refactor | `analyze --code → improve --quality → test` |
-| Security | `scan --security --owasp → improve → scan --validate` |
+# Add sequential for step-by-step
+/analyze --seq --think
 
-Remember: Commands are designed to work together. Use them in natural sequences for best results.
+# Maximum analysis
+/analyze --seq --ultrathink --all-mcp
+```
+
+### 2. Combine Commands for Workflows
+```bash
+# Complete feature workflow
+/design → /build → /test → /review → /deploy
+
+# Debugging workflow
+/troubleshoot → /analyze → /improve → /test
+```
+
+### 3. Use Personas for Expertise
+```bash
+# Security-focused development
+/build --api --seq --persona-security
+
+# Performance-critical component
+/build --component --seq --persona-performance
+```
+
+### 4. Leverage MCP Servers
+```bash
+# Documentation-driven development
+/build "OAuth implementation" --seq --c7
+
+# Visual component building
+/build "dashboard" --magic --seq
+
+# Automated testing
+/test --e2e --pup --seq
+```
+
+## Command Cheat Sheet
+
+### Quick Reference
+| Command | Primary Use | Best With |
+|---------|------------|-----------|
+| `/build` | Create code | `--tdd --seq` |
+| `/test` | Testing | `--coverage --think` |
+| `/analyze` | Code review | `--arch --ultrathink` |
+| `/troubleshoot` | Debug | `--seq --think-hard` |
+| `/improve` | Optimize | `--perf --seq` |
+| `/deploy` | Deployment | `--canary --monitor` |
+| `/design` | Architecture | `--seq --ultrathink` |
+
+### Power Combinations
+- **Full Analysis**: `/analyze --all --seq --ultrathink --all-mcp`
+- **Safe Deploy**: `/deploy --plan --validate --canary --monitor`
+- **Deep Debug**: `/troubleshoot --prod --seq --ultrathink`
+- **Quality Build**: `/build --tdd --seq --think --persona-backend`
+
+---
+
+Ready to master SuperClaude v2 commands? Start with any command and add `--seq` to see the AI's thinking process! 🚀

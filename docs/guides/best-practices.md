@@ -3,20 +3,32 @@ sidebar_position: 6
 title: SuperClaude Best Practices
 ---
 
-# SuperClaude Best Practices
+# SuperClaude v2 Best Practices
 
-Master these practices to get the most out of SuperClaude's capabilities while maintaining efficiency and code quality.
+:::info Version Notice
+This guide covers **SuperClaude v2** best practices with sequential thinking and enhanced workflows.
+- 📚 [View v1 practices](/docs/v1/guides/best-practices)
+- 🆚 [Version comparison](/docs/version-comparison)
+:::
+
+Master these practices to get the most out of SuperClaude v2's capabilities with transparent reasoning, 19 specialized commands, and intelligent automation.
 
 ## 🎯 Core Principles
 
-### 1. Trust the Automation
-```
+### 1. Trust v2's Enhanced Automation
+```bash
 ❌ Don't: Manually specify every flag and persona
 ✅ Do: Let auto-activation work based on context
 
-Example:
+Example v2:
 Just say: "Debug this TypeError"
-Auto-activates: → Analyzer persona → Sequential thinking
+Auto-activates: → Analyzer persona → --seq flag
+
+# Or use command for explicit control
+/troubleshoot "TypeError" --seq --think
+# → Step 1: Analyzing error context...
+# → Step 2: Tracing call stack...
+# → Step 3: Identifying root cause...
 ```
 
 ### 2. Specificity Beats Verbosity
@@ -28,132 +40,174 @@ Auto-activates: → Analyzer persona → Sequential thinking
 ✅ Do: "Reduce initial load from 3s to under 1s"
 ```
 
-### 3. Progressive Enhancement
-```
+### 3. Progressive Enhancement with v2 Layers
+```bash
 Start simple → Add complexity as needed
 
-Level 1: "Format this JSON"
-Level 2: "Validate and format this JSON"
-Level 3: "Create JSON schema validator with TypeScript types"
+# v2 progression with increasing depth
+Level 1: /explain "JSON format"
+Level 2: /build "JSON validator" --seq
+Level 3: /build "JSON schema validator" --seq --think --tdd
+Level 4: /design "type-safe validator" --seq --ultrathink --c7
+
+# Each level adds reasoning transparency
 ```
 
 ## 📋 Workflow Best Practices
 
-### Starting New Projects
+### Starting New Projects with v2 Sequential Flow
 
-#### The Right Way
+#### The Right Way - v2 Enhanced
+```bash
+1. Start with architecture using sequential thinking
+   /design "system" --seq --ultrathink --persona-architect
+   
+2. Build incrementally with transparency
+   /build --core --seq → /improve --features --seq → /improve --performance --seq
+
+3. Test continuously with step-by-step validation
+   /test --tdd --seq (shows: write test → implement → verify)
+
+4. Security from start with OWASP scanning
+   /scan --security --owasp --seq --think-hard
 ```
-1. Start with architecture
-   /persona:architect
-   Design a [type] system for [purpose] handling [scale]
 
-2. Build incrementally
-   Core features → Enhancement → Optimization
-
-3. Test continuously
-   Write tests as you build, not after
-
-4. Security from start
-   Include security constraints in initial design
-```
-
-#### Example Flow
-```
+#### Example v2 Flow with Sequential Reasoning
+```bash
 User: Building e-commerce platform for 10K products
 
-Day 1:
-/persona:architect --think-hard
-→ Microservices vs Monolith decision
-→ Database design
-→ API structure
+# Day 1: Architecture with transparent decisions
+/design "e-commerce platform" --seq --ultrathink --persona-architect
+# → Step 1: Analyzing scale requirements...
+# → Step 2: Evaluating architecture patterns...
+# → Step 3: Choosing microservices for scalability...
+# → Step 4: Designing service boundaries...
 
-Day 2-5:
-/persona:backend
-→ Core API implementation
-→ Database setup
-→ Authentication
+# Day 2-5: Backend with sequential building
+/build "product API" --seq --tdd --persona-backend
+# → Step 1: Writing API tests...
+# → Step 2: Implementing endpoints...
+# → Step 3: Adding database layer...
+# → Step 4: Authentication integration...
 
-Day 6-10:
-/persona:frontend
-→ Product catalog
-→ Shopping cart
-→ Checkout flow
+# Day 6-10: Frontend with component progression
+/build "product UI" --seq --magic --persona-frontend
+# → Step 1: Component architecture...
+# → Step 2: Product catalog creation...
+# → Step 3: Cart implementation...
+# → Step 4: Checkout flow...
 
-Throughout:
-/persona:qa
-→ Tests for each component
+# Throughout: Testing with visibility
+/test --e2e --seq --pup --persona-qa
+# → Step 1: Test scenario planning...
+# → Step 2: Writing test cases...
+# → Step 3: Running browser tests...
+# → Step 4: Coverage analysis...
 ```
 
-### Debugging Complex Issues
+### Debugging Complex Issues with v2 Sequential Analysis
 
-#### The Systematic Approach
-```
-1. Gather evidence
-   - Error messages
-   - When it started
-   - What changed
-   - Reproduction steps
+#### The Systematic Approach - v2 Enhanced
+```bash
+1. Gather evidence with structured input
+   /troubleshoot "issue description" --seq --think
 
-2. Let analyzer work
-   /persona:analyzer --think
+2. Watch sequential analysis unfold
+   # → Step 1: Symptom analysis
+   # → Step 2: Hypothesis formation
+   # → Step 3: Testing each hypothesis
+   # → Step 4: Root cause identification
    
-3. Test hypotheses
-   One change at a time
+3. Test fixes incrementally
+   /fix "issue" --seq --validate
    
-4. Document solution
-   For future reference
+4. Document with lessons learned
+   /document --postmortem --seq
 ```
 
-#### Real Example
-```
+#### Real v2 Example with Sequential Debugging
+```bash
 User: Random crashes in production
 
-Good approach:
-"App crashes randomly in production.
-Started: After deploying v2.3.1
-Frequency: ~5% of requests
-Logs: 'Cannot allocate memory'
-Changes: Added image processing"
+# v2 approach with full transparency
+/troubleshoot "random production crashes" --seq --ultrathink --prod
 
-SuperClaude response:
-[Analyzer activated]
-Memory issue after image processing added.
-Checking for:
-• Memory leaks in image handling
-• Missing cleanup
-• Concurrent processing limits
-[Finds unclosed streams in image processor]
+# Sequential investigation:
+# Step 1: Gathering crash data...
+#   → Started: After v2.3.1 deployment
+#   → Frequency: ~5% of requests
+#   → Error: 'Cannot allocate memory'
+#   → New feature: Image processing
+#
+# Step 2: Forming hypotheses...
+#   H1: Memory leak in image handler
+#   H2: Concurrent processing overload
+#   H3: Large image size handling
+#   H4: Missing stream cleanup
+#
+# Step 3: Testing each hypothesis...
+#   → H1: Checking object retention... ❌
+#   → H2: Analyzing concurrency... ❌
+#   → H3: Reviewing size limits... ❌
+#   → H4: Inspecting stream lifecycle... ✅
+#
+# Step 4: Root cause confirmed...
+#   → Unclosed streams in image processor
+#   → Each request leaks ~50MB
+#   → Accumulates to OOM after ~100 requests
+
+Solution: Add stream.destroy() in finally block
 ```
 
-### Performance Optimization
+### Performance Optimization with v2 Sequential Process
 
-#### The Right Order
-```
-1. Measure first
-   Get baseline metrics
+#### The Right Order - v2 Transparent
+```bash
+1. Measure first with sequential profiling
+   /analyze --performance --seq --think
    
-2. Find bottlenecks
-   Use profiling tools
+2. Find bottlenecks with step-by-step analysis
+   # → Step 1: Profiling current state
+   # → Step 2: Identifying slowest parts
+   # → Step 3: Analyzing root causes
    
-3. Fix biggest issues
-   80/20 rule applies
+3. Fix biggest issues with visibility
+   /improve --performance --seq --uc
    
-4. Verify improvements
-   Measure again
+4. Verify improvements with comparison
+   /test --performance --before-after --seq
 ```
 
-#### Example
-```
-/persona:performance
-Current: 3s page load, Target: <1s
---profile --think
+#### v2 Example with Full Journey
+```bash
+# Start optimization journey
+/analyze --performance "3s load time" --seq --think-hard --pup
 
-Results in:
-1. Bundle analysis
-2. Network waterfall
-3. Render timeline
-4. Specific optimizations
-5. Expected improvements
+# Sequential performance analysis:
+# Step 1: Measuring baseline metrics...
+#   → Load time: 3.2s
+#   → Bundle size: 2.5MB
+#   → API calls: 47 sequential
+#   → Images: 15MB unoptimized
+#
+# Step 2: Identifying bottlenecks...
+#   → 40% - Large bundle (no splitting)
+#   → 35% - Sequential API calls
+#   → 25% - Unoptimized images
+#
+# Step 3: Planning optimizations...
+#   Priority 1: Code splitting
+#   Priority 2: Parallel API calls
+#   Priority 3: Image optimization
+#
+# Step 4: Implementing fixes...
+
+/improve --performance --seq --implement
+# → Implementing code splitting...
+# → Parallelizing API calls...
+# → Optimizing images...
+
+Result: 3.2s → 0.9s (72% improvement)
 ```
 
 ## 🔧 Tool Usage Patterns
@@ -173,18 +227,22 @@ Results in:
 - Simple operations
 ```
 
-#### Sequential Thinking
-```
+#### Sequential Thinking (--seq)
+```bash
 ✅ Use when:
-- Complex debugging
-- Architecture decisions
-- Multi-step problems
-- Root cause analysis
+- Complex debugging → Shows hypothesis testing
+- Architecture decisions → Reveals decision process
+- Multi-step problems → Breaks down complexity
+- Root cause analysis → Transparent investigation
+- Learning new concepts → Step-by-step understanding
 
 ❌ Don't use when:
-- Simple fixes
-- Straightforward tasks
-- Known solutions
+- Simple fixes → Adds unnecessary verbosity
+- Straightforward tasks → Slows down execution
+- Known solutions → No exploration needed
+
+# v2 auto-activates --seq for:
+"step by step", "show your thinking", "explain how"
 ```
 
 #### Magic UI Generator
@@ -200,32 +258,34 @@ Results in:
 - Complex interactions
 ```
 
-### Flag Combinations That Work
+### Flag Combinations That Work in v2
 
 #### Power Combos
 ```bash
-# Deep security analysis
-/persona:security
-/user:analyze --security --think-hard
+# Deep security analysis with transparency
+/scan --security --seq --ultrathink --persona-security
+# Shows each vulnerability check step-by-step
 
-# Full stack feature
-/user:build --fullstack --all-mcp
+# Full stack feature with all tools
+/build "feature" --fullstack --seq --all-mcp
+# Uses C7 for docs, Magic for UI, sequential for logic
 
-# Performance deep dive
-/persona:performance
-/user:analyze --profile --seq
+# Performance deep dive with profiling
+/analyze --performance --seq --think-hard --pup
+# Browser profiling + sequential analysis
 
-# Learning mode
-/persona:mentor
-/user:explain --depth --c7
+# Learning mode with documentation
+/explain "concept" --seq --c7 --persona-mentor
+# Fetches docs + explains step-by-step
 ```
 
-#### Anti-Patterns
+#### v2 Anti-Patterns
 ```bash
-❌ --no-mcp --c7  # Contradictory
-❌ --ultrathink "format json"  # Overkill
-❌ --magic "fix bug"  # Wrong tool
-❌ Five flags for simple task  # Over-specification
+❌ --no-mcp --c7              # Contradictory flags
+❌ --ultrathink "format json"  # Overkill for simple task
+❌ --magic "fix bug"           # Wrong tool for debugging
+❌ --seq --uc "hello world"    # Sequential for trivial task
+❌ Five flags for simple task   # Over-specification
 ```
 
 ## 💡 Communication Patterns
@@ -255,46 +315,65 @@ Add specifics as needed:
 "Add 2FA with SMS"
 ```
 
-### Managing Long Conversations
+### Managing Long Conversations in v2
 
-#### Checkpoint Strategy
+#### Checkpoint Strategy with Commands
+```bash
+# Before major changes:
+/git --checkpoint "before-auth-refactor" --seq
+
+# When switching contexts:
+/spawn --checkpoint "backend-complete" --switch-to "frontend"
+
+# Before risky operations:
+/migrate --checkpoint --dry-run --seq
+# Shows migration steps before executing
+
+# v2 auto-checkpoints on risky operations
 ```
-Before major changes:
-"Create checkpoint before refactoring auth"
 
-When switching contexts:
-"Checkpoint current state, switching to frontend"
+#### Context Preservation with --uc
+```bash
+# When context > 60%:
+/load --summary --uc
+# Ultra-compressed summary of progress
 
-Before risky operations:
-"Checkpoint before database migration"
-```
+# When context > 80%:
+/compact --aggressive --keep-todos
+# Maintains task list while clearing context
 
-#### Context Preservation
-```
-When context > 60%:
-- Summarize progress
-- State current focus
-- Clear unnecessary details
-
-Example:
-"Summary: Fixed auth, built API, added tests.
-Now focus: Frontend dashboard only."
+# Example v2 context management:
+/status --seq --uc
+# → Done: Auth ✓ API ✓ Tests ✓
+# → Current: Dashboard
+# → Next: Deploy
 ```
 
 ## 🚀 Advanced Techniques
 
-### Parallel Development
-```
-Open multiple terminals:
+### Parallel Development with v2 Spawn
+```bash
+# v2 parallel execution with coordination
+/spawn --parallel "backend,frontend,tests" --seq
 
-Terminal 1: /persona:backend
-"Build API endpoints"
+# Terminal 1: Backend API
+/build "REST API" --seq --persona-backend
+# → Step 1: Designing endpoints...
+# → Step 2: Implementing controllers...
 
-Terminal 2: /persona:frontend
-"Create UI components"
+# Terminal 2: Frontend UI
+/build "React components" --seq --persona-frontend --magic
+# → Step 1: Component architecture...
+# → Step 2: UI generation...
 
-Terminal 3: /persona:qa
-"Write integration tests"
+# Terminal 3: Test Suite
+/test --integration --seq --persona-qa
+# → Step 1: Test planning...
+# → Step 2: Writing test cases...
+
+# Coordination command
+/spawn --status --seq
+# Shows progress across all parallel tasks
 ```
 
 ### Pattern Learning
@@ -310,18 +389,24 @@ Later: "Add tests"
 → Uses your testing stack
 ```
 
-### Custom Workflows
-```
-Create your own flows:
+### Custom Workflows with v2 Task Chains
+```bash
+# Define custom v2 workflow
+/task --define "TDD flow" --seq
+# → Step 1: Define workflow steps...
+# → Step 2: Set execution order...
+# → Step 3: Add validation points...
 
-"Start my TDD flow":
-1. Write failing test
-2. Implement minimum code
-3. Make test pass
-4. Refactor
-5. Repeat
+# Execute custom workflow
+/task --run "TDD flow" --seq
+# → Running: Write failing test
+# → Running: Implement minimum code
+# → Running: Make test pass
+# → Running: Refactor
+# → Loop: Next feature
 
-SuperClaude learns and follows your process
+# v2 learns and suggests workflows
+"Working on auth?" → "Use your OAuth flow?"
 ```
 
 ## ⚠️ Common Pitfalls
@@ -363,16 +448,23 @@ Follow OWASP guidelines
 ```
 
 ### Fighting the System
-```
-❌ Wrong:
-Forcing wrong persona
-Overriding smart defaults
-Too many manual flags
+```bash
+❌ Wrong in v2:
+/build "button" --seq --ultrathink --all-mcp --persona-architect
+# Over-specified for simple task
 
-✅ Right:
-Trust auto-activation
-Use natural language
-Let system guide you
+/troubleshoot --no-seq --no-think
+# Disabling helpful features
+
+✅ Right in v2:
+/build "button"
+# Let v2 choose appropriate depth
+
+"Debug this step by step"
+# Natural language triggers --seq
+
+/troubleshoot "complex issue"
+# Auto-activates --seq --think
 ```
 
 ## 📊 Metrics for Success
@@ -414,32 +506,53 @@ Test Coverage: > 80%
 □ Logging/monitoring
 ```
 
-## 🎭 Persona Switching Mastery
+## 🎭 Persona Switching Mastery in v2
 
-### Natural Transitions
-```
+### Natural Transitions with Sequential Flow
+```bash
+# v2 seamless persona transitions
 Building → Testing → Optimizing
 
-/persona:frontend
-"Build product gallery"
-[Creates components]
+/build "product gallery" --seq --persona-frontend
+# → Step 1: Component design...
+# → Step 2: Implementation...
 
 "Now test it thoroughly"
-[QA persona auto-activates]
+# [QA persona auto-activates with --seq]
+# → Step 1: Test case design...
+# → Step 2: Running tests...
 
 "Make it load faster"
-[Performance persona activates]
+# [Performance persona activates]
+# → Step 1: Performance profiling...
+# → Step 2: Optimizations...
 ```
 
-### Multi-Persona Collaboration
-```
-Complex feature requiring multiple viewpoints:
+### Multi-Persona Collaboration with v2 Coordination
+```bash
+# Complex feature with coordinated personas
+/spawn --multi-persona "payment-system" --seq
 
-Morning: Architect designs
-Afternoon: Frontend/Backend build
-Evening: QA tests
-Next day: Performance optimizes
-Finally: Security audits
+Morning: 
+  /design --system --seq --persona-architect
+  # → Payment flow architecture
+
+Afternoon:
+  /build --api --seq --persona-backend
+  /build --ui --seq --persona-frontend --magic
+  # → Parallel implementation
+
+Evening:
+  /test --comprehensive --seq --persona-qa --pup
+  # → Full test coverage
+
+Next day:
+  /improve --performance --seq --persona-performance
+  # → Speed optimization
+
+Finally:
+  /scan --security --owasp --seq --persona-security
+  # → Security hardening
 ```
 
 ## 🏁 Quick Decision Tree
@@ -457,41 +570,56 @@ Speed issues? → Performance
 Testing? → QA
 ```
 
-### Which Flag?
-```
+### Which Flag in v2?
+```bash
+Need transparency? → --seq
 Need docs? → --c7
-Complex problem? → --think / --seq
+Complex problem? → --think / --think-hard / --ultrathink
 UI component? → --magic
 Visual testing? → --pup
-Quick task? → --no-mcp
-Everything? → --all-mcp
+Save tokens? → --uc
+Quick task? → (no flags needed)
+Everything? → --all-mcp --seq
 ```
 
-### Which Command?
-```
-New feature? → /user:build
-Fix issues? → /user:troubleshoot
-Explore code? → /user:analyze
-Learning? → /user:explain
-Improve code? → /user:improve
-Check security? → /user:scan
+### Which v2 Command?
+```bash
+New feature? → /build
+Fix issues? → /troubleshoot
+Explore code? → /analyze
+Learning? → /explain
+Improve code? → /improve
+Check security? → /scan
+Deploy code? → /deploy
+Design system? → /design
+Run tests? → /test
+Manage tasks? → /task
 ```
 
-## 🌟 Golden Rules
+## 🌟 Golden Rules - v2 Enhanced
 
 1. **Clarity beats cleverness** - Simple, clear requests get better results
-2. **Context is king** - Share relevant information upfront
-3. **Trust the defaults** - Auto-activation usually picks right
-4. **Iterate naturally** - Build conversation progressively
-5. **Measure twice, cut once** - Analyze before implementing
-6. **Security is not optional** - Include from start
-7. **Tests are documentation** - Write them as you go
-8. **Personas are mindsets** - Switch based on task needs
-9. **Tools are servants** - Use them, don't be used by them
-10. **Learn from patterns** - SuperClaude adapts to you
+2. **Sequential thinking reveals process** - Use --seq to understand decisions
+3. **Context is king** - Share relevant information upfront
+4. **Trust v2's intelligence** - Auto-activation is smarter than ever
+5. **Iterate naturally** - Build conversation progressively
+6. **Measure twice, cut once** - /analyze --seq before implementing
+7. **Security is not optional** - /scan --security from start
+8. **Tests are documentation** - /test --tdd --seq as you go
+9. **Personas are mindsets** - Let them auto-activate
+10. **Tools amplify capability** - Combine them wisely
+11. **Learn from patterns** - v2 adapts to your style
+12. **Transparency builds trust** - --seq shows the why
 
-## 💭 Final Thoughts
+## 💭 Final Thoughts on v2
 
-SuperClaude is most powerful when used naturally. Don't overthink commands or flags - describe what you need clearly and let the system's intelligence work for you. The best SuperClaude sessions feel like pair programming with an expert who knows exactly when to be an architect, when to be a debugger, and when to be a teacher.
+SuperClaude v2 is most powerful when you embrace its transparency. The `--seq` flag isn't just about seeing steps - it's about understanding the reasoning, learning from the process, and building trust in the solutions. With 19 specialized commands and intelligent auto-activation, v2 feels like pair programming with a team of experts who explain their thinking.
 
-Remember: SuperClaude is designed to make you more productive, not to add complexity. When in doubt, just describe what you're trying to achieve and let the magic happen.
+The best v2 sessions combine:
+- Natural language that triggers appropriate tools
+- Sequential reasoning for complex problems
+- Smart compression (--uc) for long conversations
+- Parallel execution for efficiency
+- Automatic persona switching based on context
+
+Remember: SuperClaude v2 is designed to be transparent, efficient, and adaptive. When in doubt, just describe what you're trying to achieve and watch the sequential magic unfold! 🚀

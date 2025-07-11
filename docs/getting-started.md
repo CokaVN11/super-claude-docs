@@ -3,281 +3,411 @@ sidebar_position: 2
 title: Getting Started
 ---
 
-# Getting Started with SuperClaude
+# Getting Started with SuperClaude v2
 
-Welcome to SuperClaude! This guide will help you start using SuperClaude effectively based on your specific needs.
+:::tip Version Info
+This guide covers **SuperClaude v2** with enhanced features. [View v1 guide](/docs/v1/getting-started) | [Version comparison](/docs/version-comparison)
+:::
 
-## Quick Start by Role
+Welcome to SuperClaude v2! This guide showcases real-world scenarios with the new `--seq` (sequential thinking) and `--think` modes.
 
-### 🆕 I'm New to SuperClaude
+## Quick Start by Scenario
 
-Start with these basics:
+### 🆕 First Time Using SuperClaude v2
 
 ```bash
-# 1. Load your project
-/user:load --depth medium
+# 1. Natural language - let auto-activation work
+"analyze this codebase and suggest improvements"
 
-# 2. Get an overview
-/user:analyze --code
+# 2. Add sequential thinking for step-by-step analysis
+/load --seq
+/analyze --code --seq --think
 
-# 3. Try a simple task
-Fix this typo in README.md
-
-# 4. Let auto-activation work
-"Why is this function slow?"
-→ Performance persona activates automatically
+# 3. Watch SuperClaude reason through the analysis
+# → Loading project structure...
+# → Identifying key components...
+# → Analyzing patterns...
+# → Generating recommendations...
 ```
 
-**Next steps**:
-- Read [CLAUDE.md Configuration Guide](./guides/claude-md-guide)
-- Try different [personas](./guides/personas-md-guide)
-- Explore [commands](./guides/commands-guide)
+### 🐛 Debug Complex Issues with Sequential Thinking
 
-### 👨‍💻 I'm Starting a New Project
-
-Perfect workflow for new projects:
+The `--seq` flag enables step-by-step reasoning, perfect for tricky bugs:
 
 ```bash
-# Day 1: Setup and Architecture
-/user:load
-/user:dev-setup --install --ci
-/persona:architect
-/user:design --api --ddd --think-hard
-
-# Day 2: Start Building
-/user:build --init --react  # or --api or --fullstack
-/user:test --unit --coverage
-
-# Ongoing: Feature Development
-/user:build --feature "user authentication" --tdd
-/user:test --e2e
-```
-
-**Pro tip**: Use `/user:git --checkpoint` before major changes
-
-### 🐛 I Need to Debug Something
-
-Systematic debugging approach:
-
-```bash
-# For development issues
-/user:troubleshoot --investigate
-"Error: Cannot read property 'user' of undefined"
-
-# For production emergencies
-/user:troubleshoot --prod --emergency
-"Site is down! 500 errors everywhere!"
-
-# Let analyzer persona help
-/persona:analyzer
-"Random crashes, can't reproduce locally"
-```
-
-**Remember**: SuperClaude traces root causes, not just symptoms
-
-### ⚡ I Want to Optimize Performance
-
-Performance improvement workflow:
-
-```bash
-# 1. Measure first
-/user:analyze --profile
-
-# 2. Get specific metrics
-/persona:performance
-"Page load takes 4 seconds"
-
-# 3. Iterative improvement
-/user:improve --performance --iterate --threshold 90
-
-# 4. Verify improvements
-/user:test --performance
-```
-
-### 🔒 I Need a Security Audit
-
-Security-first approach:
-
-```bash
-# 1. Full security scan
-/user:scan --security --owasp
-
-# 2. Let security persona guide
-/persona:security
-"Review our authentication system"
-
-# 3. Fix issues systematically
-/user:improve --security
-/user:scan --validate
-```
-
-## Common First Tasks
-
-### Task 1: Understanding Your Codebase
-
-```bash
-/user:load --depth deep
-/user:analyze --architecture --think
-
-Ask: "What are the main components and how do they interact?"
-```
-
-### Task 2: Adding a Feature
-
-```bash
-# Use natural language
-"Add password reset functionality"
-
-# Or be more specific
-/user:build --feature "password reset with email verification"
-```
-
-### Task 3: Fixing a Bug
-
-```bash
-# Describe the issue
-"Users can't login after password reset"
+# Example 1: Memory leak investigation
+/troubleshoot "app crashes after 2 hours with OOM error" --seq --think-hard
 
 # SuperClaude will:
-→ Activate analyzer persona
-→ Investigate the issue
-→ Provide fix with tests
+# Step 1: Analyze memory allocation patterns
+# Step 2: Identify potential leak sources
+# Step 3: Trace object lifecycle
+# Step 4: Pinpoint retention issues
+# Step 5: Provide fix with verification
+
+# Example 2: Race condition debugging
+/troubleshoot "random data corruption in concurrent writes" --seq --ultrathink
+
+# Sequential process:
+# → Analyze concurrent access patterns
+# → Map execution timelines
+# → Identify race windows
+# → Design synchronization solution
+# → Implement with tests
 ```
 
-### Task 4: Learning Something New
+### 🏗️ Architecture Design with Deep Thinking
+
+Combine thinking modes for comprehensive design:
 
 ```bash
-/persona:mentor
-"Explain React hooks with examples"
+# Example 1: Microservices design
+/design "e-commerce platform" --microservices --seq --think-hard
 
-# Or with documentation
-"How do I use React Query?" --c7
+# Sequential design process:
+# Step 1: Domain analysis and boundaries
+# Step 2: Service identification
+# Step 3: API contract design
+# Step 4: Data flow mapping
+# Step 5: Implementation roadmap
+
+# Example 2: System migration planning
+/design "migrate monolith to microservices" --seq --ultrathink --c7
+
+# With documentation lookup:
+# → Analyze current architecture
+# → Research best practices (Context7)
+# → Design transition strategy
+# → Create migration phases
+# → Risk assessment & mitigation
 ```
 
-## Understanding Auto-Activation
+### ⚡ Performance Optimization with Analysis
 
-SuperClaude automatically activates the right tools and personas:
+Use thinking modes to understand performance issues:
 
-### Keyword Triggers
-- "bug" or "error" → Analyzer persona
-- "slow" or "performance" → Performance persona
-- "secure" or "vulnerability" → Security persona
-- "explain" or "understand" → Mentor persona
-
-### File-Based Activation
-- Open `Component.tsx` → Frontend persona
-- Open `api.js` → Backend persona
-- Open `test.spec.js` → QA persona
-
-### Context Triggers
-- External library mentioned → Context7 docs
-- Complex problem → Sequential thinking
-- UI component needed → Magic builder
-
-## Your First Day Checklist
-
-- [ ] Load your project: `/user:load`
-- [ ] Run basic analysis: `/user:analyze --code`
-- [ ] Try a simple fix or feature
-- [ ] Experiment with different personas
-- [ ] Use natural language for requests
-- [ ] Let auto-activation work
-- [ ] Try a thinking mode: `--think`
-- [ ] Create a checkpoint: `/user:git --checkpoint`
-
-## Essential Concepts
-
-### 1. Personas Are Mindsets
 ```bash
-/persona:frontend  # Thinks about UX
-/persona:backend   # Thinks about reliability
-/persona:security  # Thinks about threats
+# Example 1: API optimization
+/analyze --profile --seq --think
+"API endpoint takes 3 seconds to respond"
+
+# Sequential analysis:
+# → Profile request lifecycle
+# → Identify bottlenecks
+# → Analyze database queries
+# → Check caching opportunities
+# → Recommend optimizations
+
+# Example 2: Frontend performance
+/improve --performance --seq --uc --persona-frontend
+"React app has 5-second initial load"
+
+# Process with compression:
+# → Analyze bundle size
+# → Check render performance
+# → Identify optimization points
+# → Implement improvements
+# → Verify with metrics
 ```
 
-### 2. Commands Chain Naturally
+### 🔒 Security Audit with Systematic Thinking
+
+Security requires methodical analysis:
+
 ```bash
-analyze → design → build → test → deploy
+# Example 1: Authentication review
+/scan --security --seq --think-hard --persona-security
+
+# Sequential security scan:
+# Step 1: Authentication flow analysis
+# Step 2: Session management review
+# Step 3: Token security check
+# Step 4: Vulnerability assessment
+# Step 5: Remediation plan
+
+# Example 2: OWASP compliance
+/scan --owasp --seq --ultrathink
+"prepare for security certification"
+
+# Comprehensive process:
+# → Map OWASP requirements
+# → Scan each category
+# → Document findings
+# → Prioritize fixes
+# → Implementation guide
 ```
 
-### 3. Thinking Modes Scale
+## Advanced Use Cases with --seq and --think
+
+### 📊 Data Pipeline Debugging
+
 ```bash
-Simple task → No flag needed
-Complex task → --think
-Architecture → --think-hard
-Critical → --ultrathink
+/troubleshoot "ETL pipeline dropping 10% of records" --seq --think-hard
+
+# Sequential investigation:
+# → Trace data flow stages
+# → Analyze transformation logic
+# → Check error handling
+# → Identify drop points
+# → Implement monitoring
 ```
 
-### 4. Be Specific
-```
-❌ "Make it better"
-✅ "Reduce load time from 3s to under 1s"
+### 🎯 API Design with Best Practices
 
-❌ "Fix the bug"
-✅ "Login fails with 401 after 5 minutes"
-```
+```bash
+/design "REST API for payment processing" --api --seq --think --c7
 
-## Quick Wins
-
-### Get Instant Value
-1. **Code Quality**: `/user:analyze --code` → `/user:improve --quality`
-2. **Performance**: `/user:analyze --profile` → See bottlenecks immediately
-3. **Security**: `/user:scan --security` → Find vulnerabilities
-4. **Documentation**: `/user:document --readme` → Auto-generate docs
-
-### Time Savers
-- Use `--uc` flag for 70% token savings
-- Let auto-activation choose tools
-- Use natural language instead of complex commands
-- Trust the defaults
-
-## What Makes SuperClaude Different
-
-### Without SuperClaude
-```
-You: "Fix the login bug"
-Claude: "I'll help you fix the login bug. Can you provide more details 
-about what's happening? What error messages are you seeing? When did 
-this start occurring?..."
+# Step-by-step design:
+# → Research payment API patterns (Context7)
+# → Design resource structure
+# → Define endpoints & methods
+# → Plan error handling
+# → Security considerations
+# → Generate OpenAPI spec
 ```
 
-### With SuperClaude
+### 🔧 Refactoring Legacy Code
+
+```bash
+/improve --quality --seq --think --persona-refactorer
+"modernize 5-year-old JavaScript codebase"
+
+# Systematic refactoring:
+# → Analyze code patterns
+# → Identify improvement areas
+# → Plan refactoring phases
+# → Maintain backwards compatibility
+# → Implement with tests
 ```
-You: "Fix the login bug"
-SuperClaude: [Analyzer persona activates]
-Investigating login issue...
-✓ Found: Session timeout after 5 min
-✓ Cause: JWT expiry not refreshing
-✓ Fix: Implement token refresh
-[Provides code fix with tests]
+
+### 🚀 CI/CD Pipeline Setup
+
+```bash
+/dev-setup --ci --seq --think
+"implement blue-green deployment"
+
+# Sequential implementation:
+# → Analyze current deployment
+# → Design pipeline stages
+# → Implement infrastructure
+# → Configure automation
+# → Add monitoring & rollback
 ```
 
-## Next Steps
+### 📱 Mobile App Performance
 
-### Explore the Guides
-1. [CLAUDE.md Configuration](./guides/claude-md-guide) - Core settings
-2. [Commands Guide](./guides/commands-guide) - All 18 commands
-3. [Personas Guide](./guides/personas-md-guide) - 9 expert modes
-4. [Best Practices](./guides/best-practices) - Pro tips
+```bash
+/analyze --profile --seq --think-hard
+"React Native app stutters during scroll"
 
-### Try These Scenarios
-1. Build something: `/user:build --react --magic`
-2. Debug an issue: `/user:troubleshoot --investigate`
-3. Optimize code: `/user:improve --quality`
-4. Learn a concept: `/persona:mentor` + question
+# Performance analysis:
+# → Profile render cycles
+# → Analyze component updates
+# → Check list optimizations
+# → Memory usage patterns
+# → Optimization strategy
+```
 
-### Join the Community
-- Star the [GitHub repo](https://github.com/NomenAK/SuperClaude)
-- Share your workflows
-- Contribute improvements
+## Thinking Mode Comparison
 
-## Remember
+### When to Use Each Mode
 
-- **Start simple** - Don't over-specify commands
-- **Trust the system** - Auto-activation usually picks right
-- **Be specific** - Clear goals get better results
-- **Use natural language** - Describe what you need
-- **Iterate naturally** - Build conversations progressively
+| Mode | Use Case | Token Usage | Example |
+|------|----------|-------------|---------|
+| No flag | Simple tasks | Minimal | `"fix typo"` |
+| `--think` | Standard analysis | ~4K tokens | `/analyze --code --think` |
+| `--think-hard` | Complex problems | ~10K tokens | `/troubleshoot --prod --think-hard` |
+| `--ultrathink` | Critical decisions | ~32K tokens | `/design --architecture --ultrathink` |
 
-Welcome to a new way of coding with AI. SuperClaude is ready to be your specialized development partner.
+### Sequential Thinking Benefits
 
-Ready? Just type what you need and let SuperClaude do the rest! 🚀
+```bash
+# Without --seq: Direct solution
+/fix "login error"
+→ Here's the fix: [code]
+
+# With --seq: Explained reasoning
+/fix "login error" --seq
+→ Step 1: Analyzing error pattern...
+→ Step 2: Checking auth flow...
+→ Step 3: Found issue in token validation...
+→ Step 4: Implementing fix...
+→ Step 5: Adding tests...
+```
+
+## Power User Combinations
+
+### 🎭 Persona + Sequential + Thinking
+
+```bash
+# Backend API optimization
+/improve --performance --seq --think-hard --persona-backend
+
+# Security-focused refactoring
+/improve --quality --seq --think --persona-security
+
+# Frontend debugging
+/troubleshoot --seq --think --persona-frontend --magic
+```
+
+### 🔌 MCP + Sequential Analysis
+
+```bash
+# Documentation-driven development
+/build "implement OAuth2" --seq --c7 --think
+
+# UI component research and build
+/build "data viz dashboard" --seq --magic --think-hard
+
+# Browser testing automation
+/test "checkout flow" --e2e --seq --pup
+```
+
+### ⚡ Token Optimization Strategies
+
+```bash
+# Maximum efficiency for simple tasks
+/explain "what is REST" --uc
+
+# Balanced approach for complex tasks
+/analyze --architecture --uc --seq --think
+
+# Deep analysis with compression
+/troubleshoot --prod --uc --seq --ultrathink
+```
+
+## Real-World Workflows
+
+### Complete Feature Development
+
+```bash
+# 1. Design phase
+/design "user notifications system" --seq --think-hard
+
+# 2. Implementation with TDD
+/build --feature "notifications" --tdd --seq --persona-backend
+
+# 3. Frontend integration
+/build --frontend "notification UI" --magic --seq --persona-frontend
+
+# 4. Testing
+/test --e2e --seq --pup
+
+# 5. Performance check
+/analyze --profile --seq --think
+
+# 6. Deployment
+/deploy --canary --seq --monitor
+```
+
+### Production Incident Response
+
+```bash
+# 1. Emergency triage
+/troubleshoot --prod --emergency --seq
+
+# 2. Root cause analysis
+/analyze --logs --seq --think-hard
+
+# 3. Implement fix
+/fix --hotfix --seq
+
+# 4. Post-mortem
+/document --incident --seq --think
+```
+
+## Best Practices for v2
+
+### 1. Let Sequential Thinking Guide You
+```bash
+# Good: Let SuperClaude show its reasoning
+/troubleshoot "complex issue" --seq --think
+
+# Less optimal: Jumping to solutions
+/fix "complex issue"
+```
+
+### 2. Match Thinking Depth to Complexity
+```bash
+# Simple bug: Light thinking
+/fix "typo in variable name" --think
+
+# Architecture decision: Deep thinking
+/design "multi-tenant system" --ultrathink --seq
+```
+
+### 3. Combine Features for Power
+```bash
+# Maximum capability
+/analyze --architecture --seq --ultrathink --c7 --persona-architect
+```
+
+### 4. Use Natural Language First
+```bash
+# Start simple
+"help me optimize this database query"
+
+# Add flags if needed
+/improve --performance --seq --think
+```
+
+## Quick Reference Card
+
+### Essential Flags
+- `--seq` - Step-by-step reasoning
+- `--think` - Standard analysis (~4K)
+- `--think-hard` - Deep analysis (~10K)
+- `--ultrathink` - Maximum depth (~32K)
+- `--uc` - UltraCompressed (70% savings)
+
+### Power Combinations
+- Debug: `--seq --think-hard`
+- Design: `--seq --ultrathink --c7`
+- Optimize: `--seq --think --uc`
+- Security: `--seq --think-hard --owasp`
+
+### Auto-Activation Keywords
+- "step by step" → Activates sequential
+- "think through" → Activates thinking mode
+- "analyze deeply" → Activates think-hard
+- "comprehensive" → Activates ultrathink
+
+## Your First Week Roadmap
+
+**Day 1**: Try sequential thinking
+```bash
+/load --seq
+/analyze --code --seq --think
+```
+
+**Day 2**: Explore thinking depths
+```bash
+/troubleshoot "your bug" --think
+/troubleshoot "complex bug" --think-hard
+```
+
+**Day 3**: Combine with personas
+```bash
+/build --feature "new feature" --seq --persona-backend
+```
+
+**Day 4**: Use MCP servers
+```bash
+/explain "React hooks" --seq --c7
+/build "UI component" --magic --think
+```
+
+**Day 5**: Master token optimization
+```bash
+/analyze --architecture --uc --seq --ultrathink
+```
+
+**Weekend**: Build something awesome!
+```bash
+/design "your idea" --seq --think-hard
+/build --init --tdd --seq
+```
+
+---
+
+Ready to experience the power of sequential thinking? Start with any task and add `--seq` to see SuperClaude's reasoning process! 🚀

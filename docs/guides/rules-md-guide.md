@@ -3,9 +3,15 @@ sidebar_position: 2
 title: RULES.md Standards Guide
 ---
 
-# Understanding RULES.md - Operational Standards & Best Practices
+# Understanding RULES.md - v2 Operational Standards & Best Practices
 
-RULES.md enforces quality standards and operational behaviors through a severity-based system. Think of it as Claude's quality control system that ensures consistent, secure, and efficient operations.
+:::info Version Notice
+This guide covers **SuperClaude v2** with enhanced rules, sequential thinking, and modular YAML.
+- 📚 [View v1 guide](/docs/v1/guides/rules-md-guide)
+- 🆚 [Version comparison](/docs/version-comparison)
+:::
+
+RULES.md enforces quality standards and operational behaviors through a severity-based system. Think of it as Claude's quality control system that ensures consistent, secure, and efficient operations - now with transparent reasoning through `--seq`!
 
 ## The Severity System
 
@@ -24,16 +30,26 @@ Alternative: Use environment variables:
 • Access via process.env.API_KEY
 ```
 
-#### Research Example
-```
+#### Research Example with v2 Sequential
+```bash
 User: Add Stripe payment integration
+
+# ❌ v1 approach (blocked)
 SuperClaude: [Without checking docs] Here's how Stripe works...
 ❌ BLOCKED: Must verify with official docs first
 
-[Correct approach]
-SuperClaude: Checking Stripe documentation...
-[Fetches official docs via Context7]
-✅ Implementing Stripe v3 following official patterns
+# ✅ v2 approach with --seq
+/build "Stripe integration" --seq --c7 --think
+
+# Sequential process:
+# Step 1: Resolving Stripe library...
+#   → C7: Found stripe-node v12.1.0
+# Step 2: Fetching payment flow docs...
+#   → C7: Retrieved checkout session guide
+# Step 3: Analyzing integration patterns...
+#   → Best practice: Server-side session creation
+# Step 4: Implementing with official patterns...
+✅ Following Stripe v3 documented approach
 ```
 
 ### HIGH [7-9] → Fix Required
@@ -63,22 +79,37 @@ try {
 }
 ```
 
-#### Git Workflow Example [8]
-```
+#### Git Workflow Example [8] with v2 Sequential
+```bash
 # ❌ Without rules
 git add .
 git commit -m "stuff"
 git push --force
 
-# ✅ With rules enforced
-git status              # Check changes
-git diff                # Review modifications
-git add -p              # Selective staging
+# ✅ v2 with sequential git workflow
+/git --commit --seq --think
+
+# Sequential git process:
+# Step 1: Checking repository status...
+#   → Modified: 5 files in auth module
+# Step 2: Reviewing changes...
+#   → auth.service.ts: JWT implementation
+#   → auth.controller.ts: Login endpoints
+# Step 3: Analyzing commit scope...
+#   → Feature: Authentication system
+# Step 4: Staging relevant files...
+#   → Using git add -p for selective staging
+# Step 5: Creating semantic commit...
+
 git commit -m "feat: add user authentication with JWT
 
 - Implement login/logout endpoints
 - Add JWT token generation
-- Include refresh token logic"
+- Include refresh token logic
+
+🤖 Generated with Claude Code
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
 git push origin feature/auth
 ```
 
@@ -120,13 +151,33 @@ const fullName = `${firstName} Doe`;
 
 ## Core Protocols in Action
 
-### Critical Thinking [H:8]
+### Critical Thinking [H:8] with v2 Sequential
 
-SuperClaude challenges assumptions and provides alternatives:
+SuperClaude challenges assumptions and provides alternatives with transparent reasoning:
 
-```
+```bash
 User: We should use MongoDB for everything
-SuperClaude: Consider these factors:
+
+# v2 with sequential critical analysis
+/analyze --db-choice --seq --think --persona-architect
+
+# Sequential evaluation:
+# Step 1: Analyzing data relationships...
+#   → User ↔ Orders: One-to-many
+#   → Order ↔ Items: Many-to-many
+#   → Conclusion: Highly relational
+#
+# Step 2: Evaluating requirements...
+#   → ACID needed: Yes (payments)
+#   → Complex queries: Yes (reporting)
+#   → Schema flexibility: Limited need
+#
+# Step 3: Comparing options...
+#   → MongoDB: Good for documents
+#   → PostgreSQL: Better for relations
+#   → Hybrid: Best of both worlds
+
+Consider these factors:
 • Relational data? → PostgreSQL might be better
 • Need ACID? → Traditional RDBMS recommended  
 • Truly document-based? → MongoDB fits
@@ -148,24 +199,40 @@ No unsubstantiated claims:
 ✅ "OWASP recommends this approach"
 ```
 
-## Task Management Examples
+## Task Management Examples with v2 Sequential
 
 ### Complex Feature Implementation
-```
+```bash
 User: Add real-time notifications to our app
 
-SuperClaude creates todos:
-1. Research WebSocket vs SSE vs Polling
-2. Design notification architecture
-3. Implement WebSocket server
-4. Create client-side connection manager
-5. Add notification UI components
-6. Implement retry logic
-7. Add tests for real-time features
+# v2 with sequential task breakdown
+/task "real-time notifications" --breakdown --seq --think
 
-[Updates immediately as work progresses]
-✅ Research complete: Using Socket.io
-🔄 Designing architecture...
+# Sequential task planning:
+# Step 1: Analyzing requirements...
+#   → Real-time updates needed
+#   → Bi-directional communication
+#   → Reconnection handling required
+#
+# Step 2: Evaluating technologies...
+#   → WebSocket: Full duplex, complex
+#   → SSE: One-way, simpler
+#   → Polling: Inefficient for real-time
+#
+# Step 3: Creating task breakdown...
+
+SuperClaude creates todos:
+1. Research WebSocket vs SSE vs Polling --seq
+2. Design notification architecture --seq --think
+3. Implement WebSocket server --seq
+4. Create client-side connection manager --seq
+5. Add notification UI components --magic --seq
+6. Implement retry logic --seq --think-hard
+7. Add tests for real-time features --seq
+
+[Updates immediately with sequential progress]
+✅ Research complete: Using Socket.io (Step 1-3 done)
+🔄 Designing architecture... (Step 1: Entity mapping...)
 ```
 
 ### Parallel Operations
@@ -213,28 +280,50 @@ Creating checkpoint before risky operation...
 Proceed with refactor. Use '/rollback' if needed.
 ```
 
-## Communication Standards
+## Communication Standards with v2 Features
 
-### Concise Responses
-```
-❌ Long explanation:
+### Concise Responses with Sequential Mode
+```bash
+# ❌ Long explanation (v1 style):
 "I'll help you fix this bug. First, I need to understand what's 
 happening. Then I'll analyze the code to find the root cause. 
 After that, I'll implement a solution and test it..."
 
-✅ Concise:
-Debugging process:
-• Reproduce issue
-• Trace error source
-• Implement fix
-• Add regression test
+# ✅ v2 Concise without --seq:
+/troubleshoot "bug" --think
+→ Found: Race condition in auth
+→ Fix: Add mutex lock
+→ Test: Concurrent login test
+
+# ✅ v2 Detailed with --seq:
+/troubleshoot "bug" --seq --think
+# Step 1: Reproducing issue...
+# Step 2: Tracing error source...
+# Step 3: Implementing fix...
+# Step 4: Adding regression test...
 ```
 
-### Constructive Pushback
-```
+### Constructive Pushback with v2 Analysis
+```bash
 User: Let's put all business logic in the frontend
 
-SuperClaude: Security risk: Exposing business rules client-side
+# v2 with sequential security analysis
+/analyze --security --seq --think --persona-security
+
+# Sequential risk assessment:
+# Step 1: Identifying security implications...
+#   → Business rules exposed in browser
+#   → Can be modified by users
+#   → No server-side validation
+#
+# Step 2: Evaluating attack vectors...
+#   → Price manipulation
+#   → Permission bypass
+#   → Data tampering
+#
+# Step 3: Proposing secure alternative...
+
+Security risk: Exposing business rules client-side
 Consider:
 • API validates all operations
 • Frontend handles UI logic only
@@ -439,14 +528,124 @@ SuperClaude applies standards:
 ❌ Documentation: Missing API docs → Required
 ```
 
-## Best Practices Summary
+## v2 Modular YAML Architecture
+
+### How Rules Are Organized
+```yaml
+# v2 uses @include for modular rules
+Structure:
+  RULES.md: Main rules with @includes
+  shared/superclaude-rules.yml: Core rules
+  commands/shared/: Command-specific rules
+
+Example from RULES.md:
+  ## Security Standards
+  @include shared/superclaude-rules.yml#Security_Standards
+  
+  ## Development Practices  
+  @include shared/superclaude-rules.yml#Development_Practices
+```
+
+### Rule Inheritance with --seq
+```bash
+# Rules cascade through command execution
+/build "api" --seq --think
+
+# Sequential rule application:
+# Step 1: Loading global rules...
+#   → Security: Input validation required
+#   → Quality: Error handling mandatory
+# Step 2: Loading command rules...
+#   → Build: TDD cycle enforced
+#   → Build: Clean architecture
+# Step 3: Applying context rules...
+#   → TypeScript: Strict mode on
+#   → API: OpenAPI documentation
+```
+
+## Real-World v2 Scenarios
+
+### Production Emergency with Sequential Response
+```bash
+User: Site is down! 500 errors everywhere!
+
+# v2 emergency protocol with --seq
+/troubleshoot --emergency --prod --seq --ultrathink
+
+# Sequential emergency response:
+# Step 1: Triage severity...
+#   → Impact: All users affected
+#   → Priority: CRITICAL [10]
+#
+# Step 2: Checking vitals...
+#   → Server: Responding
+#   → Database: Connection timeout
+#   → Cache: Operational
+#
+# Step 3: Analyzing recent changes...
+#   → Deploy 2h ago: New connection pooling
+#   → Config change: Pool size 100→10
+#
+# Step 4: Implementing fix...
+#   → Reverting pool size
+#   → Restarting connections
+#
+# Step 5: Verifying recovery...
+#   → Services: All green
+#   → Monitoring: Normal metrics
+#
+# Step 6: Post-mortem preparation...
+#   → Root cause: Misconfigured pool
+#   → Action items: Config validation
+
+Resolution time: 3 minutes
+```
+
+### Code Review with v2 Standards
+```bash
+User: Review this PR
+
+# v2 PR review with sequential analysis
+/review --pr --seq --think --all-checks
+
+# Sequential review process:
+# Step 1: Security scan [CRITICAL]...
+#   ✅ Input validation present
+#   ✅ No hardcoded secrets
+#   ⚠️ Missing CSRF token check
+#
+# Step 2: Code quality [HIGH]...
+#   ✅ Test coverage: 87%
+#   ⚠️ Function complexity: 8 (limit: 5)
+#   ❌ Missing error boundaries
+#
+# Step 3: Performance check [HIGH]...
+#   ⚠️ N+1 query in getUserPosts()
+#   ✅ Proper indexing
+#   ✅ Connection pooling
+#
+# Step 4: Standards compliance [MEDIUM]...
+#   ✅ Follows naming conventions
+#   ⚠️ Missing JSDoc on public methods
+#   ✅ Proper file structure
+
+Review summary:
+- 1 HIGH issue must be fixed (error boundaries)
+- 3 warnings to address
+- Security and performance acceptable
+```
+
+## Best Practices Summary - v2 Enhanced
 
 1. **Let severity guide you**: CRITICAL stops everything, HIGH must be fixed
-2. **Evidence over opinion**: Always back claims with data
-3. **Fail gracefully**: Every error needs a recovery path
-4. **Learn from patterns**: Adapt to user preferences
-5. **Security isn't optional**: Always validate, never trust
-6. **Quality compounds**: Small improvements add up
-7. **Context is king**: Remember everything in session
+2. **Use --seq for transparency**: See rule application step-by-step
+3. **Evidence over opinion**: Always back claims with data
+4. **Leverage @includes**: Modular rules for consistency
+5. **Fail gracefully**: Every error needs a recovery path
+6. **Learn from patterns**: Adapt to user preferences
+7. **Security isn't optional**: Always validate, never trust
+8. **Quality compounds**: Small improvements add up
+9. **Context is king**: Remember everything in session
+10. **Embrace automation**: Let v2 auto-activate appropriate rules
 
-Remember: RULES.md isn't about restrictions - it's about consistency, quality, and protecting both the code and the developer from common pitfalls.
+Remember: RULES.md in v2 isn't about restrictions - it's about consistency, quality, and protecting both the code and the developer from common pitfalls, with full transparency through sequential reasoning! 🚀

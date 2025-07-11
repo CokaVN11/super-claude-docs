@@ -3,141 +3,252 @@ sidebar_position: 1
 title: CLAUDE.md
 ---
 
-# CLAUDE.md - SuperClaude Configuration
+# CLAUDE.md - SuperClaude v2 Configuration
 
-The main configuration file that defines core settings, thinking modes, and operational parameters.
+:::info Version Notice
+This explains **SuperClaude v2's modular architecture** with YAML configuration and `@include` system.
+- 📚 [View v1 configuration](/docs/v1/core-config/claude-md)
+- 🆚 [Version comparison](/docs/version-comparison)
+:::
 
-## Core Configuration
+The main configuration file that leverages v2's modular YAML architecture for maximum flexibility and reusability.
+
+## v2 Architecture: Modular YAML System
 
 ```yaml
-Philosophy: Code>docs | Simple→complex | Security first
-Communication: Concise format | Symbols: →|&:» | Bullets>prose
-Workflow: TodoRead()→TodoWrite(3+)→Execute | Update immediate
+# SuperClaude v2 uses modular YAML with @include
+Architecture: Modular YAML files + @include system
+Benefits: Reusable components | Organized structure | Easy updates
+Structure:
+  CLAUDE.md: Main config with @include directives
+  shared/: Reusable YAML modules
+  commands/: Command-specific configs
+  
+Example:
+  @include shared/superclaude-core.yml#Core_Philosophy
+  @include commands/shared/universal-constants.yml#Universal_Legend
+```
+
+### File Organization
+```
+super-claude/
+├── CLAUDE.md                 # Main config with @includes
+├── shared/                   # Reusable modules
+│   ├── superclaude-core.yml
+│   ├── superclaude-rules.yml
+│   ├── superclaude-mcp.yml
+│   └── superclaude-personas.yml
+└── commands/                 # Command configs
+    └── shared/
+        ├── universal-constants.yml
+        ├── flag-inheritance.yml
+        └── execution-patterns.yml
+```
+
+## Core Configuration with --seq
+
+```yaml
+Philosophy: Code>docs | Simple→complex | Security first | Sequential reasoning
+Communication: Concise format | Symbols: →|&:» | Bullets>prose | Step-by-step
+Workflow: TodoRead()→TodoWrite(3+)→Execute --seq | Update immediate
 Stack: React|TS|Vite + Node|Express|PostgreSQL + Git|ESLint|Jest
-Commands: /user:<command> [flags] | Ex: /user:build --init
+Commands: /<command> [flags] | 19 specialized | Ex: /build --tdd --seq
 ```
 
-### Key Principles
+### Key v2 Enhancements
 
-- **Code over Documentation**: Focus on implementation
-- **Simple to Complex**: Start with minimal viable solutions
-- **Security First**: All operations prioritize security
+- **19 Specialized Commands**: Not just basic operations
+- **Sequential Thinking**: `--seq` for step-by-step reasoning
+- **Modular Architecture**: `@include` for component reuse
+- **Auto-activation**: Smart persona and tool selection
 
-## Thinking Modes
-
-Different levels of analysis based on task complexity:
+## Enhanced Thinking Modes
 
 ```yaml
-Activation: Natural language OR command flags
-Flags: --think | --think-hard | --ultrathink
-none: Single file|Basic | think: Multi-file|Standard  
-think hard: Architecture|Complex | ultrathink: Redesign|Critical
-Examples: /user:analyze --code --think | /user:design --api --ultrathink
+# v2 adds sequential reasoning to all thinking modes
+Activation: Natural language OR command flags OR auto-activation
+Flags: --think | --think-hard | --ultrathink | --seq (NEW!)
+Sequential: Shows step-by-step reasoning process
+
+Examples with --seq:
+  /analyze --arch --seq --think        # Architecture with steps
+  /troubleshoot --prod --seq --think-hard  # Debug with reasoning
+  /design --system --seq --ultrathink  # Maximum depth + steps
 ```
 
-### Mode Selection
+### Sequential Thinking Examples
 
-- **No flag**: Basic single-file operations
-- **--think**: Multi-file analysis, standard complexity
-- **--think-hard**: Architecture decisions, complex problems
-- **--ultrathink**: System redesigns, critical analysis
+```bash
+# Without --seq
+/fix "memory leak"
+→ Here's the fix: [code]
 
-## Token Economy
+# With --seq  
+/fix "memory leak" --seq
+→ Step 1: Analyzing memory patterns...
+→ Step 2: Identifying leak sources...
+→ Step 3: Tracing object retention...
+→ Step 4: Implementing fix...
+→ Step 5: Verifying solution...
+```
 
-Optimized for minimal token usage:
+## Advanced Token Economy
 
 ```yaml
-Targets: Minimal commands | Responses<4 lines | Concise docs
-Symbols: →(leads to) |(separator) &(combine) :(define) »(sequence)
-Remove: the|a|very|really|that|which | "in order to"→to | and→&
+# v2 enhanced with UltraCompressed mode
+Standard: Minimal commands | Responses<4 lines | Concise docs
+UltraCompressed: ~70% reduction | Telegram-style | --uc flag
+Adaptive: Auto-activate when context>70% | Smart compression
+
+Optimization with --seq:
+  Normal: Full step descriptions
+  --uc: Compressed steps (→1:analyze →2:fix →3:test)
 ```
 
-### Optimization Strategies
+### Token Optimization in Practice
 
-1. Use symbols instead of words
-2. Remove filler words
-3. Prefer bullets over prose
-4. Limit responses to 4 lines
+```bash
+# Standard sequential
+/analyze --performance --seq
+# → Step 1: Profiling application...
+# → Step 2: Identifying bottlenecks...
+# → Step 3: Analyzing database queries...
 
-## UltraCompressed Mode
+# UltraCompressed sequential
+/analyze --performance --seq --uc
+# →1:profile →2:bottlenecks →3:queries
+```
 
-Extreme token reduction (~70%):
+## Modular YAML Features
 
 ```yaml
-Purpose: ~70% token reduction | Telegram-style docs | Symbols & abbrevs
-Activation: --uc flag | Natural language | Auto when context>70%
-Rules: shared/ultracompressed.yml | Remove filler | Use symbols
-Output: Direct info only | No intros/outros | Lists>prose
-Legend: Auto-generate | Used symbols/abbrevs only | Start of docs
+# v2's powerful @include system
+@include: Reference specific sections from YAML files
+Syntax: @include path/to/file.yml#Section_Name
+Benefits: 
+  - Reuse configurations across commands
+  - Maintain single source of truth
+  - Easy updates propagate everywhere
+  
+Common Includes:
+  @include shared/superclaude-core.yml#Core_Philosophy
+  @include shared/superclaude-rules.yml#Development_Practices
+  @include shared/superclaude-mcp.yml#Server_Capabilities
+  @include shared/superclaude-personas.yml#All_Personas
 ```
 
-### When Activated
-
-- Manual: Use `--uc` flag
-- Automatic: When context exceeds 70%
-- Natural language requests for compression
-
-## Code Economy
-
-Clean, minimal code generation:
+### Real @include Examples
 
 ```yaml
-Generation: No comments | Short names | No boilerplate
-Documentation: Only on request | Bullets>prose | Essential facts only
-Patterns: Destructure | Chain | Ternary | Arrow functions
-Output: Code only | No explanation unless asked
+# In CLAUDE.md
+## Core Principles
+@include shared/superclaude-core.yml#Core_Philosophy
+
+## MCP Integration  
+@include shared/superclaude-mcp.yml#Server_Capabilities_Extended
+@include shared/superclaude-mcp.yml#Workflows
+
+## Personas
+@include shared/superclaude-personas.yml#Intelligent_Activation_Patterns
 ```
 
-### Code Standards
-
-- No comments unless explicitly requested
-- Concise variable names
-- Modern JavaScript patterns
-- Direct output without explanations
-
-## Cost Optimization
-
-Model selection based on task complexity:
+## v2 Command Structure
 
 ```yaml
-Models: Simple→sonnet | Complex→sonnet-4 | Critical→opus-4
-MCP: C7 progressive loading | Seq adaptive thinking | Batch similar
-Efficiency: Min tokens | Cache results | Batch ops
+# All 19 commands follow consistent patterns
+Format: /<command> [flags] [arguments]
+Universal Flags: Available on ALL commands
+  --seq: Sequential reasoning
+  --think/--think-hard/--ultrathink: Analysis depth
+  --uc: UltraCompressed mode
+  --c7/--magic/--pup: MCP servers
+  --persona-*: Cognitive profiles
+
+Command Categories:
+  Development: /build, /test, /dev-setup
+  Analysis: /analyze, /troubleshoot, /improve, /explain, /review
+  Operations: /deploy, /migrate, /scan, /estimate, /cleanup, /git
+  Design: /design
+  Workflow: /spawn, /document, /task
+  System: /load
 ```
 
-### Model Selection Criteria
-
-- **Sonnet**: Simple tasks, basic operations
-- **Sonnet-4**: Complex analysis, multi-file operations
-- **Opus-4**: Critical decisions, system architecture
-
-## Auto-Activation
-
-Context-aware feature activation:
+## Auto-Activation Patterns
 
 ```yaml
-Files: *.tsx→frontend | *.sql→data | Docker→devops | *.test→qa
-Keywords: bug|error→debugger | optimize→performance | secure→security
-Context: TypeError→trace | Module error→deps | Permission→security
+# v2's intelligent activation based on context
+Files: 
+  *.tsx→frontend+react | *.py→backend+python
+  *.sql→data+sql | Docker*→devops+docker
+  *.test.*→qa+testing | *.spec.*→qa+jest
+
+Keywords:
+  "step by step"→--seq | "think through"→--think
+  "memory leak"→analyzer+performance | "secure"→security
+  "optimize"→performance | "refactor"→refactorer
+
+Error Patterns:
+  TypeError→analyzer+--seq | OOM→performance+--seq
+  401/403→security | Timeout→performance+backend
 ```
 
-### Triggers
-
-- File extensions automatically select personas
-- Keywords activate relevant tools
-- Error types guide debugging approach
-
-## Performance
-
-Operational efficiency guidelines:
+## Performance Standards
 
 ```yaml
-Ops: Parallel>sequential | Batch similar | One in-progress
+# v2 optimized for efficiency
+Operations: 
+  Parallel>sequential (except with --seq flag)
+  Batch similar tasks
+  One in-progress task
+  Smart caching with MCP
+
+Sequential Performance:
+  --seq: Adds ~20% time for reasoning display
+  --seq --uc: Minimizes overhead to ~5%
+  Benefits: Better debugging, learning, validation
+
+Compression Baselines:
+  Standard: 100% tokens
+  --think: +40% tokens
+  --uc: -70% tokens
+  --seq: +20% tokens
+  --seq --uc: -50% tokens (net)
 ```
 
-### Best Practices
+## Session Management
 
-1. Prefer parallel operations
-2. Batch similar tasks
-3. Maintain single task in progress
-4. Update status immediately
+```yaml
+# v2 enhanced session awareness
+Context: Preserve across commands | Build on previous
+Memory: CLAUDE.md for persistence | Session state
+Workflow: Natural command chaining | Contextual suggestions
+
+Example Session:
+  /load --seq                    # Loads with reasoning
+  /analyze --arch --seq --think  # Builds on loaded context
+  /design "new feature" --seq    # Uses analysis insights
+  /build --tdd --seq            # Implements design
+```
+
+## Integration Examples
+
+```bash
+# Debugging with sequential reasoning
+/troubleshoot "API timeout" --seq --think-hard --persona-backend
+
+# Architecture design with documentation
+/design "microservices" --seq --ultrathink --c7
+
+# Performance optimization journey
+/analyze --performance --seq
+/improve --performance --seq --uc
+/test --performance --seq
+
+# Security audit workflow
+/scan --security --owasp --seq --think-hard
+/improve --security --seq --persona-security
+```
+
+---
+
+Ready to leverage v2's modular architecture? The `@include` system makes SuperClaude infinitely extensible! 🚀
